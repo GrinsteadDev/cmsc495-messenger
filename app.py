@@ -10,9 +10,12 @@ def hello():
 
 @app.route("/git-push/", methods=['GET', 'POST'])
 def update_repository():
+    return os.path.dirname(os.path.realpath(__file__))
+    '''
     repo = Repo(os.path.dirname(os.path.realpath(__file__)))
     repo.remotes.origin.pull()
     return "", 200
+    '''    
 
 @app.route("/<string:name>/")
 def say_hello(name):
