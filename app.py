@@ -10,7 +10,7 @@ def hello():
 
 @app.route("/git-push/", methods=['GET', 'POST'])
 def update_repository():
-    repo = Repo(os.path.dirname(os.path.realpath(__file__)))
+    repo = Repo(".")
     repo.remotes.orgin.pull()
     return "", 200
 
