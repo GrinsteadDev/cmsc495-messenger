@@ -16,7 +16,7 @@ def update_repository():
 
 @app.route("/<string:name>/")
 def say_hello(name):
-    return f"Hello {name}!"
+    return f"Hello {name}!<br>Nice Name!"
 
 if __name__ == "__main__":
     app.run()
