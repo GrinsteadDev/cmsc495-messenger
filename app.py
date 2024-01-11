@@ -11,7 +11,7 @@ def hello():
 @app.route("/git-push/", methods=['GET', 'POST'])
 def update_repository():
     repo = Repo(".")
-    repo.remotes.orgin.pull()
+    repo.remotes.origin.pull()
     return "", 200
 
 @app.route("/<string:name>/")
