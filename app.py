@@ -7,6 +7,11 @@ app = Flask(__name__)
 def hello():
     return "Hello World!"
 
+@app.route("/git-push/")
+def update_repository():
+    '''
+    '''
+    
 
 @app.route("/<string:name>/")
 def say_hello(name):
