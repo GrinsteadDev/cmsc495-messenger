@@ -11,6 +11,9 @@ def hello():
 @app.route("/git-push/", methods=['GET', 'POST'])
 def update_repository():
     curr_dir = os.path.dirname(os.path.realpath(__file__))
+    
+    # Validation to make sure this is a webhook from git here
+    # ...
 
     # Retrives the pull request for the current directory
     repo = Repo(curr_dir)
