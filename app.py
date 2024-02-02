@@ -12,7 +12,7 @@ def hello():
 @app.route("/<string:name>", defaults={"ext":""})
 @app.route("/<string:name>.<string:ext>")
 def fetch_templates(name, ext):
-    # Attemps to fetch a template
+    # Fetches a template as a webpage url or returns 404
     if ext in ["", "html", "htm"]:
         try:
             return render_template(f"{name}.html")
