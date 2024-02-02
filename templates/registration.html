@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="globals.css" />
-    <link rel="stylesheet" href="styleguide.css" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/globals.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleguide.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registration/style.css') }}" />
+</head>
   <body>
     <div class="macbook-pro">
       <div class="div">
@@ -49,8 +49,8 @@
           </div>
         </div>
         <div class="text-wrapper-6">Registration</div>
-        <img class="rectangle" src="img/rectangle-1.svg" />
-        <img class="img" src="img/rectangle-2.png" />
+        <img class="rectangle" src="{{ url_for('static', filename='img/registration/rectangle-1.svg') }}" />
+        <img class="img" src="{{ url_for('static', filename='img/registration/rectangle-2.png') }}" />
       </div>
     </div>
   </body>

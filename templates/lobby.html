@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="globals.css" />
-    <link rel="stylesheet" href="styleguide.css" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/globals.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleguide.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lobby/style.css') }}" />
+</head>
   <body>
     <div class="macbook-pro">
       <div class="div">
@@ -73,7 +73,7 @@
             <div class="text-wrapper-2">Current User :</div>
             <div class="text-wrapper-3">User 1</div>
           </div>
-          <div class="user-images-user"><img class="check" src="img/check.svg" /></div>
+          <div class="user-images-user"><img class="check" src="{{ url_for('static', filename='img/lobby/check.svg') }}" /></div>
         </div>
         <div class="list-dialog-dark">
           <div class="content">
@@ -92,7 +92,7 @@
                 <div class="content-2"><div class="headline-2">Red Room</div></div>
                 <div class="trailing-element"></div>
               </div>
-              <div class="horizontal-dark"><img class="divider" src="img/divider-18.svg" /></div>
+              <div class="horizontal-dark"><img class="divider" src="{{ url_for('static', filename='img/lobby/divider-18.svg') }}" /></div>
             </div>
             <div class="list-item">
               <div class="state-layer-overlay"></div>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="content-2"><div class="headline-2">Earth Room</div></div>
               </div>
-              <div class="horizontal-dark"><img class="divider" src="img/divider-18.svg" /></div>
+              <div class="horizontal-dark"><img class="divider" src="{{ url_for('static', filename='img/lobby/divider-18.svg') }}" /></div>
             </div>
             <div class="list-item">
               <div class="state-layer-overlay-2"></div>
@@ -136,7 +136,7 @@
                         </div>
                         <div class="content-2"><div class="headline-2">User 1</div></div>
                       </div>
-                      <div class="horizontal-dark"><img class="img" src="img/divider-33.svg" /></div>
+                      <div class="horizontal-dark"><img class="img" src="{{ url_for('static', filename='img/lobby/divider-33.svg') }}" /></div>
                     </div>
                     <div class="list-item">
                       <div class="state-layer-overlay-3"></div>
@@ -147,7 +147,7 @@
                         <div class="content-2"><div class="headline-2">User 2</div></div>
                         <div class="trailing-element"></div>
                       </div>
-                      <div class="horizontal-dark"><img class="img" src="img/divider-33.svg" /></div>
+                      <div class="horizontal-dark"><img class="img" src="{{ url_for('static', filename='img/lobby/divider-33.svg') }}" /></div>
                     </div>
                     <div class="list-item">
                       <div class="state-layer-overlay-3"></div>
@@ -158,7 +158,7 @@
                         <div class="content-2"><div class="headline-2">User 3</div></div>
                         <div class="trailing-element"></div>
                       </div>
-                      <div class="horizontal-dark"><img class="img" src="img/divider-24.png" /></div>
+                      <div class="horizontal-dark"><img class="img" src="{{ url_for('static', filename='img/lobby/divider-24.png') }}" /></div>
                     </div>
                     <div class="list-item">
                       <div class="state-layer-overlay-3"></div>
@@ -171,12 +171,12 @@
                           <div class="checkboxes-dark">
                             <div class="state-layer-3">
                               <div class="container"></div>
-                              <img class="icons-check-small" src="img/icons-check-small-92.png" />
+                              <img class="icons-check-small" src="{{ url_for('static', filename='img/lobby/icons-check-small-92.png') }}" />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="horizontal-dark"><img class="img" src="img/divider-24.png" /></div>
+                      <div class="horizontal-dark"><img class="img" src="{{ url_for('static', filename='img/lobby/divider-24.png') }}" /></div>
                     </div>
                     <div class="list-item">
                       <div class="state-layer-overlay-3"></div>
@@ -189,12 +189,12 @@
                           <div class="checkboxes-dark">
                             <div class="state-layer-3">
                               <div class="container"></div>
-                              <img class="icons-check-small" src="img/icons-check-small-92.png" />
+                              <img class="icons-check-small" src="{{ url_for('static', filename='img/lobby/icons-check-small-92.png') }}" />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="horizontal-dark"><img class="img" src="img/divider-24.png" /></div>
+                      <div class="horizontal-dark"><img class="img" src="{{ url_for('static', filename='img/lobby/divider-24.png') }}" /></div>
                     </div>
                     <div class="list-item">
                       <div class="state-layer-overlay-3"></div>
@@ -207,12 +207,12 @@
                           <div class="checkboxes-dark">
                             <div class="state-layer-3">
                               <div class="container"></div>
-                              <img class="icons-check-small" src="img/icons-check-small-92.png" />
+                              <img class="icons-check-small" src="{{ url_for('static', filename='img/lobby/icons-check-small-92.png') }}" />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="horizontal-dark"><img class="img" src="img/divider-24.png" /></div>
+                      <div class="horizontal-dark"><img class="img" src="{{ url_for('static', filename='img/lobby/divider-24.png') }}" /></div>
                     </div>
                     <div class="list-item">
                       <div class="state-layer-overlay-3"></div>
@@ -225,12 +225,12 @@
                           <div class="checkboxes-dark">
                             <div class="state-layer-3">
                               <div class="container"></div>
-                              <img class="icons-check-small" src="img/icons-check-small-92.png" />
+                              <img class="icons-check-small" src="{{ url_for('static', filename='img/lobby/icons-check-small-92.png') }}" />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="horizontal-dark"><img class="img" src="img/divider-24.png" /></div>
+                      <div class="horizontal-dark"><img class="img" src="{{ url_for('static', filename='img/lobby/divider-24.png') }}" /></div>
                     </div>
                     <div class="list-item">
                       <div class="state-layer-overlay-3"></div>
@@ -243,12 +243,12 @@
                           <div class="checkboxes-dark">
                             <div class="state-layer-3">
                               <div class="container"></div>
-                              <img class="icons-check-small" src="img/icons-check-small-92.png" />
+                              <img class="icons-check-small" src="{{ url_for('static', filename='img/lobby/icons-check-small-92.png') }}" />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="horizontal-dark"><img class="img" src="img/divider-24.png" /></div>
+                      <div class="horizontal-dark"><img class="img" src="{{ url_for('static', filename='img/lobby/divider-24.png') }}" /></div>
                     </div>
                     <div class="list-item">
                       <div class="state-layer-overlay-3"></div>
@@ -261,12 +261,12 @@
                           <div class="checkboxes-dark">
                             <div class="state-layer-3">
                               <div class="container"></div>
-                              <img class="icons-check-small" src="img/icons-check-small-92.png" />
+                              <img class="icons-check-small" src="{{ url_for('static', filename='img/lobby/icons-check-small-92.png') }}" />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="horizontal-dark"><img class="img" src="img/divider-24.png" /></div>
+                      <div class="horizontal-dark"><img class="img" src="{{ url_for('static', filename='img/lobby/divider-24.png') }}" /></div>
                     </div>
                     <div class="list-item">
                       <div class="state-layer-overlay-3"></div>
@@ -279,12 +279,12 @@
                           <div class="checkboxes-dark">
                             <div class="state-layer-3">
                               <div class="container"></div>
-                              <img class="icons-check-small" src="img/icons-check-small-92.png" />
+                              <img class="icons-check-small" src="{{ url_for('static', filename='img/lobby/icons-check-small-92.png') }}" />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="horizontal-dark"><img class="img" src="img/divider-24.png" /></div>
+                      <div class="horizontal-dark"><img class="img" src="{{ url_for('static', filename='img/lobby/divider-24.png') }}" /></div>
                     </div>
                     <div class="list-item">
                       <div class="state-layer-overlay-3"></div>
@@ -297,12 +297,12 @@
                           <div class="checkboxes-dark">
                             <div class="state-layer-3">
                               <div class="container"></div>
-                              <img class="icons-check-small" src="img/icons-check-small-92.png" />
+                              <img class="icons-check-small" src="{{ url_for('static', filename='img/lobby/icons-check-small-92.png') }}" />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="horizontal-dark"><img class="img" src="img/divider-24.png" /></div>
+                      <div class="horizontal-dark"><img class="img" src="{{ url_for('static', filename='img/lobby/divider-24.png') }}" /></div>
                     </div>
                     <div class="list-item">
                       <div class="state-layer-overlay-4"></div>
@@ -315,7 +315,7 @@
                           <div class="checkboxes-dark">
                             <div class="state-layer-3">
                               <div class="container"></div>
-                              <img class="icons-check-small" src="img/icons-check-small-92.png" />
+                              <img class="icons-check-small" src="{{ url_for('static', filename='img/lobby/icons-check-small-92.png') }}" />
                             </div>
                           </div>
                         </div>
@@ -334,9 +334,9 @@
               </div>
             </div>
           </div>
-          <img class="icons-radio-button" src="img/icons-radio-button-checked.svg" />
-          <img class="icons-radio-button-2" src="img/icons-radio-button-checked.svg" />
-          <img class="icons-radio-button-3" src="img/icons-radio-button-checked.svg" />
+          <img class="icons-radio-button" src="{{ url_for('static', filename='img/lobby/icons-radio-button-checked.svg') }}" />
+          <img class="icons-radio-button-2" src="{{ url_for('static', filename='img/lobby/icons-radio-button-checked.svg') }}" />
+          <img class="icons-radio-button-3" src="{{ url_for('static', filename='img/lobby/icons-radio-button-checked.svg') }}" />
         </div>
       </div>
     </div>
