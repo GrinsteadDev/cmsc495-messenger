@@ -43,6 +43,95 @@ def update_repository():
 def say_hello(name):
     return f"Hello {name}!<br>Nice Name!<br> Testing Change<br> New Changes"
 
+@app.route("/api/register", methods=['POST'])
+def register_user():
+    first_name = request.form.get('first-name')
+    last_name = request.form.get('last-name')
+    username = request.form.get('username')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    status = request.form.get('status')
+
+
+    response = {
+        'message': 'User registered successfully',
+        'user_info': {
+            'first_name': first_name,
+            'last_name': last_name,
+            'username': username,
+            'email': email,
+            'status': status
+        }
+    }
+
+    return jsonify(response)
+
+# New route for email verification
+@app.route("/api/verify-email/<verification_token>", methods=['POST'])
+def verify_email(verification_token):
+    # need to check token on database
+    if verification_token == "valid_token":
+        return jsonify({'message': 'Email verification successful'})
+    else:
+        return jsonify({'error': 'Invalid verification token'}), 400
+
+@app.route('/api/login', methods=['POST'])
+def user_login():
+    # Get data from the form
+    username = request.form.get('username')
+    password = request.form.get('password')
+    status = request.form.get('status')
+
+    # Check credentials on database
+    if username == 'demo' and password == 'password':
+        response = {
+            'message': 'Login successful',
+            'user_info': {
+                'username': username,
+                'status': status
+            }
+        }
+        return jsonify(response)
+    else:
+        return jsonify({'error': 'Invalid credentials'}), 401  # Unauthorized status code
+
+@app.route('/api/logout', methods=['POST'])
+def user_logout():
+
+    authorization_header = request.headers.get('Authorization')
+    if not authorization_header or not authorization_header.startswith('Bearer '):
+        return jsonify({'error': 'Unauthorized'}), 401  
+
+    access_token = authorization_header.split(' ')[1]
+
+    # Get data from the form
+    logout_message = request.form.get('message')
+
+    # Logout logic 
+    response = {
+        'message': 'Logout successful',
+        'logout_info': {
+            'access_token': access_token,
+            'logout_message': logout_message
+        }
+    }
+    return jsonify(response)
+
+
+@app.route('/api/password-recovery', methods=['POST'])
+def password_recovery():
+    # Get data from the form
+    user_email = request.form.get('email')
+
+    # Perfrom user recovery, (recovery email and generate token)
+    response = {
+        'message': 'Password recovery email sent.',
+        'user_info': {
+            'email': user_email
+        }
+    }
+    return jsonify(response)
+
 
 
 if __name__ == "__main__":
