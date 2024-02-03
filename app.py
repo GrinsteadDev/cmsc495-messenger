@@ -104,7 +104,6 @@ def user_logout():
 
     access_token = authorization_header.split(' ')[1]
 
-    # Get data from the form
     logout_message = request.form.get('message')
 
     # Logout logic 
@@ -120,7 +119,6 @@ def user_logout():
 
 @app.route('/api/password-recovery', methods=['POST'])
 def password_recovery():
-    # Get data from the form
     user_email = request.form.get('email')
 
     # Perfrom user recovery, (recovery email and generate token)
