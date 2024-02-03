@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/globals.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleguide.css') }}" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block html_head %}{% endblock %}
+</head>
+<body>
+    {% block html_body %}{% endblock %}
+</body>
+</html>

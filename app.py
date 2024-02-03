@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request
 from git import Repo
 import jinja2
+import modules.settings
 
 app = Flask(__name__)
 
@@ -13,7 +14,7 @@ def hello():
 @app.route("/<string:name>.<string:ext>")
 def fetch_templates(name, ext):
     # Fetches a template as a webpage url or returns 404
-    if ext in ["", "html", "htm"]:
+    if ext in ["", "html", "htm"] and not modules.settings.match_file_blacklist(name=f"{name}.*"):
         try:
             return render_template(f"{name}.html")
         except jinja2.exceptions.TemplateNotFound as e:
@@ -38,12 +39,6 @@ def update_repository():
     
     # Returns the 200 S_OK Status code
     return "", 200
-
-@app.route("/<string:name>/")
-def say_hello(name):
-    return f"Hello {name}!<br>Nice Name!<br> Testing Change<br> New Changes"
-
-
 
 if __name__ == "__main__":
     app.run()
