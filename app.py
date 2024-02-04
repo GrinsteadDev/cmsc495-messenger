@@ -38,7 +38,7 @@ def update_repository():
     # Returns the 200 S_OK Status code
     return "", 200
 
-@app.route("/api/register", methods=['POST'])
+@app.route("/api/register", methods=['GET', 'POST'])
 def register_user():
     first_name = request.form.get('first-name')
     last_name = request.form.get('last-name')
