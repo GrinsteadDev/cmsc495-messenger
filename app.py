@@ -127,6 +127,10 @@ def password_recovery():
     }
     return jsonify(response)
 
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    root_dir = os.path.dirname(os.path.abspath(__file__))
+    return send_from_directory(os.path.join(root_dir, 'static'), filename)
 
 
 if __name__ == "__main__":
