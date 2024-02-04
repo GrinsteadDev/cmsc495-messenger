@@ -9,7 +9,7 @@ import modules.rest.api
 app = Flask(__name__)
 app.register_blueprint(modules.rest.api.api_blueprint)
 
-@app.route("/", defaults={ "name":"home", "ext":"html" })
+"""@app.route("/", defaults={ "name":"home", "ext":"html" })
 @app.route("/<string:name>", defaults={ "ext":"" })
 @app.route("/<string:name>.<string:ext>")
 def fetch_templates(name, ext):
@@ -41,4 +41,4 @@ def update_repository():
     return "", 200
 
 if __name__ == "__main__":
-    app.run()
+    app.run() """
