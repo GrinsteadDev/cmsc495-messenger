@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, request, jsonify
 
 api_blueprint = Blueprint('api', __name__)
 
@@ -7,7 +7,7 @@ def sample():
     """
     """
 
-@app.route("/api/register", methods=['GET'])
+@api_blueprint.route("/api/register", methods=['GET'])
 def register_user():
     first_name = request.form.get('first-name')
     last_name = request.form.get('last-name')
@@ -31,7 +31,7 @@ def register_user():
     return jsonify(response)
 
 # New route for email verification
-@app.route("/api/verify-email/<verification_token>", methods=['POST'])
+@api_blueprint.route("/api/verify-email/<verification_token>", methods=['POST'])
 def verify_email(verification_token):
     # need to check token on database
     if verification_token == "valid_token":
@@ -39,7 +39,7 @@ def verify_email(verification_token):
     else:
         return jsonify({'error': 'Invalid verification token'}), 400
 
-@app.route('/api/login', methods=['POST'])
+@api_blueprint.route('/api/login', methods=['POST'])
 def user_login():
     # Get data from the form
     username = request.form.get('username')
@@ -59,7 +59,7 @@ def user_login():
     else:
         return jsonify({'error': 'Invalid credentials'}), 401  # Unauthorized status code
 
-@app.route('/api/logout', methods=['POST'])
+@api_blueprint.route('/api/logout', methods=['POST'])
 def user_logout():
 
     authorization_header = request.headers.get('Authorization')
@@ -81,7 +81,7 @@ def user_logout():
     return jsonify(response)
 
 
-@app.route('/api/password-recovery', methods=['POST'])
+@api_blueprint.route('/api/password-recovery', methods=['POST'])
 def password_recovery():
     user_email = request.form.get('email')
 
