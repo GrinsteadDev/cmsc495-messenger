@@ -7,7 +7,7 @@ def sample():
     """
     """
 
-@app.route("/api/register", methods=['GET', 'POST'])
+@app.route("/api/register", methods=['GET'])
 def register_user():
     first_name = request.form.get('first-name')
     last_name = request.form.get('last-name')
