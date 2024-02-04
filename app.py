@@ -2,15 +2,13 @@ import os
 from flask import Flask, render_template, request, jsonify
 from git import Repo
 import jinja2
+# Custom Modules located at ./modules/*
 import modules.settings
 
 app = Flask(__name__)
 
-@app.route("/")
-def hello():
-    return "Hello World!"
-
-@app.route("/<string:name>", defaults={"ext":""})
+@app.route("/", defaults={ "name":"home", "ext":"html" })
+@app.route("/<string:name>", defaults={ "ext":"" })
 @app.route("/<string:name>.<string:ext>")
 def fetch_templates(name, ext):
     # Fetches a template as a webpage url or returns 404
@@ -126,8 +124,6 @@ def password_recovery():
         }
     }
     return jsonify(response)
-
-
 
 if __name__ == "__main__":
     app.run()
