@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 async function getChatRooms() {
     try {
       const response = await axios.get('/api/chat-rooms');
