@@ -5,9 +5,11 @@ import jinja2
 # Custom Modules located at ./modules/*
 import modules.settings
 import modules.rest.api
+import modules.template_extensions.extension
 
 app = Flask(__name__)
 app.register_blueprint(modules.rest.api.api_blueprint)
+app.jinja_env.globals.update(modules.template_extensions.extension.template_extensions)
 
 @app.route("/", defaults={ "name":"home", "ext":"html" })
 @app.route("/<string:name>", defaults={ "ext":"" })
