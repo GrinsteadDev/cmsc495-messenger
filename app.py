@@ -3,20 +3,20 @@ from flask import Flask, render_template, request, jsonify
 from git import Repo
 import jinja2
 # Custom Modules located at ./modules/*
-import modules.settings
-import modules.rest.api
-import modules.template_extensions.extension
+from modules import settings
+from modules.rest import api
+from modules.template_extensions import extension
 
 app = Flask(__name__)
-app.register_blueprint(modules.rest.api.api_blueprint)
-app.jinja_env.globals.update(modules.template_extensions.extension.template_extensions)
+app.register_blueprint(api.api_blueprint)
+app.jinja_env.globals.update(extension.template_extensions)
 
 @app.route("/", defaults={ "name":"home", "ext":"html" })
 @app.route("/<string:name>", defaults={ "ext":"" })
 @app.route("/<string:name>.<string:ext>")
 def fetch_templates(name, ext):
     # Fetches a template as a webpage url or returns 404
-    if ext in ["", "html", "htm"] and not modules.settings.match_file_blacklist(name=f"{name}.*"):
+    if ext in ["", "html", "htm"] and not settings.match_file_blacklist(name=f"{name}.*"):
         try:
             return render_template(f"{name}.html")
         except jinja2.exceptions.TemplateNotFound as e:
