@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
+
 {% block title %}Lobby{% endblock %}
+
 {% block html_head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/login/style.css') }}" />
 {% endblock %}
+
 {% block html_body %}
 <div class="macbook-pro">
     <div class="div">
@@ -13,32 +16,30 @@
                         <div class="headline">Login</div>
                         <p class="supporting-text">Sign in to your Banter Box Account</p>
                     </div>
+                    <!-- Start of form -->
+                    <form method="POST" action="{{ url_for('login') }}">
+                        <div class="input-chip-dark">
+                            <label for="username" class="label-text-wrapper">
+                                <div class="text-wrapper">User Name :</div>
+                            </label>
+                            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        </div>
+                        <div class="input-chip-dark-2">
+                            <label for="password" class="label-text-wrapper">
+                                <div class="text-wrapper">Password :</div>
+                            </label>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="button-dark">Login</button>
+                    </form>
+                    <!-- End of form -->
+                    <button class="button-dark">
+                        <div class="state-layer"><div class="label-text">Register</div></div>
+                    </button>
                 </div>
-            </div>
-            <button class="button-dark">
-                <div class="state-layer"><div class="label-text">Register</div></div>
-            </button>
-            <div class="input-chip-dark">
-                <div class="label-text-wrapper"><div class="text-wrapper">User Name</div></div>
-            </div>
-            <button class="state-layer-wrapper">
-                <div class="state-layer"><div class="label-text">Login</div></div>
-            </button>
-            <div class="div-wrapper">
-                <div class="state-layer"><div class="label-text">Exit</div></div>
-            </div>
-            <div class="text-wrapper-2">User Name :</div>
-            <div class="password">Password&nbsp;&nbsp;:</div>
-            <div class="input-chip-dark">
-                <div class="label-text-wrapper"><div class="text-wrapper">User Name</div></div>
-            </div>
-            <div class="input-chip-dark-2">
-                <div class="label-text-wrapper"><div class="text-wrapper">Password</div></div>
             </div>
         </div>
         <div class="text-wrapper-3">Banter Box</div>
-        <img class="rectangle" src="{{ url_for('static', filename='img/login/rectangle-1.svg') }}" />
-        <img class="img" src="{{ url_for('static', filename='img/login/rectangle-2.png') }}" />
     </div>
 </div>
 {% endblock %}

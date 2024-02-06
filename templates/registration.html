@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
+
 {% block title %}Lobby{% endblock %}
+
 {% block html_head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/registration/style.css') }}" />
 {% endblock %}
+
 {% block html_body %}
 <div class="macbook-pro">
     <div class="div">
-        <div class="overlap-group">
+        <form method="POST" action="{{ url_for('register') }}" class="overlap-group">
             <div class="basic-dialog-dark">
                 <div class="text-content">
                     <div class="title-description">
@@ -15,40 +18,31 @@
                     </div>
                 </div>
             </div>
-            <button class="button-dark">
-                <div class="state-layer"><div class="label-text">Cancel</div></div>
-            </button>
-            <button class="state-layer-wrapper">
-                <div class="state-layer"><div class="label-text">Submit</div></div>
-            </button>
-            <div class="text-wrapper">Email</div>
+            
             <div class="input-chip-dark">
-                <div class="label-text-wrapper"><div class="label-text-2">Email</div></div>
+                <input type="email" name="email" placeholder="Email" required>
             </div>
-            <div class="text-wrapper-2">Password</div>
-            <div class="div-wrapper">
-                <div class="label-text-wrapper"><div class="label-text-2">Password</div></div>
-            </div>
-            <div class="input-chip-dark-2">
-                <div class="state-layer-2"><div class="label-text-2">Last</div></div>
-            </div>
-            <div class="text-wrapper-3">Name</div>
-            <div class="text-wrapper-4">Username</div>
-            <div class="input-chip-dark-3">
-                <div class="state-layer-2"><div class="label-text-2">First</div></div>
-            </div>
+            
             <div class="input-chip-dark-4">
-                <div class="label-text-wrapper"><div class="label-text-2">Username</div></div>
+                <input type="text" name="username" placeholder="Username" required>
             </div>
-            <div class="text-wrapper-5">Re-enter Password</div>
+            
+            <div class="input-chip-dark-3">
+                <input type="text" name="name" placeholder="First and Last Name" required>
+            </div>
+            
+            <div class="input-chip-dark-2">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            
             <div class="input-chip-dark-5">
-                <div class="label-text-wrapper"><div class="label-text-2">Username</div></div>
+                <input type="password" name="password_confirm" placeholder="Re-enter Password" required>
             </div>
-        </div>
+            
+            <button type="submit" class="button-dark">Submit</button>
+            <button type="button" class="button-dark" onclick="location.href='{{ url_for('index') }}'">Cancel</button>
+        </form>
         <div class="text-wrapper-6">Registration</div>
-        <img class="rectangle" src="{{ url_for('static', filename='img/registration/rectangle-1.svg') }}" />
-        <img class="img" src="{{ url_for('static', filename='img/registration/rectangle-2.png') }}" />
     </div>
 </div>
 {% endblock %}
-
