@@ -6,8 +6,10 @@ import jinja2
 from modules import settings
 from modules.rest import api
 from modules.template_extensions import extension
+from modules.db.db import init_app as init_db
 
 app = Flask(__name__)
+init_db(app)
 app.register_blueprint(api.api_blueprint)
 app.jinja_env.globals.update(extension.template_extensions)
 

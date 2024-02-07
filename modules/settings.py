@@ -1,6 +1,10 @@
 from typing import Collection
 from fnmatch import fnmatch
 
+class Config:
+    SQLALCHEMY_DATABASE_URI = 'postgresql://dbadmin:dbadmin@localhost/cmsc495messenger_db'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 file_blacklist = [
     "base.html",
     "head.html"
