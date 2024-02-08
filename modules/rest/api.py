@@ -219,15 +219,3 @@ def update_settings():
     }
 
     return jsonify(response)
-
-@app.route('/static/img/<img_file_name>', methods=['GET'])
-def get_image(img_file_name):
-    return send_from_directory('static/img', img_file_name)
-
-@app.route('/static/css/<css_file_name>', methods=['GET'])
-def get_css(css_file_name):
-    return send_from_directory('static/css', css_file_name)
-
-@app.route('/static/js/<js_file_name>', methods=['GET'])
-def get_js(js_file_name):
-    return send_from_directory('static/js', js_file_name)
