@@ -1,7 +1,7 @@
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 import bcrypt
-from .models import UserAccount
-from .db import db
+from models import UserAccount
+from db import db
 
 def get_user(username):
   user = UserAccount.query.filter_by(username=username).first()

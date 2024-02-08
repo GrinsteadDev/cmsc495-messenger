@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template
 from git import Repo
 import jinja2
 # Custom Modules located at ./modules/*
@@ -9,6 +9,7 @@ from modules.template_extensions import extension
 from modules.db.db import init_app as init_db
 
 app = Flask(__name__)
+app.config.update(settings.config)
 init_db(app)
 app.register_blueprint(api.api_blueprint)
 app.jinja_env.globals.update(extension.template_extensions)
@@ -45,4 +46,4 @@ def update_repository():
     return "", 200
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
