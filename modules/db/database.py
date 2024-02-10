@@ -1,7 +1,7 @@
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 import bcrypt
 from models import UserAccount
-from db import db
+from db.db import db
 
 
 def get_user(username):

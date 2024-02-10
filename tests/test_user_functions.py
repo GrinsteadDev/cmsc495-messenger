@@ -1,6 +1,14 @@
 import unittest
+from sys import path
+from os.path import dirname, realpath
 from unittest.mock import patch, MagicMock
+# Fixed missing import for error objects 
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+
+# Needed to set path before accessing the module at parent dir
+path.append(f"{dirname(realpath(__file__))}/..")
 from modules.db.database import get_user, verify_user, register_user
+
 
 
 class TestUserFunctions(unittest.TestCase):

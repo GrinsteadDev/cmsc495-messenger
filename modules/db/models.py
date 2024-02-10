@@ -1,4 +1,4 @@
-from db import db
+from db.db import db
 from sqlalchemy.sql import func
 
 class UserAccount(db.Model):
