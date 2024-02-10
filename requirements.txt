@@ -1,3 +1,6 @@
+# Required because of the dependencies in psycopg2,bcrypt, and sqlalchemy
+CMake
+# Project Dependencies
 Flask==2.2
 Werkzeug==2.2.2
 GitPython==3.1.40
