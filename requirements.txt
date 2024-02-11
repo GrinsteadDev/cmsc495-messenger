@@ -6,6 +6,6 @@ SQLAlchemy==2.0.25
 Flask-SQLAlchemy==3.0.3
 # Prerequiste for psycopg2
 psycopg2_binary==2.8.4
-psycopg2==2.8.4
-# Prerequisite for bcrpyt
-bcrypt==4.1.2
+# psycopg2==2.8.4
+# No rust perequisite for bcrpyt when using <=3.2.2
+bcrypt==3.2.2
