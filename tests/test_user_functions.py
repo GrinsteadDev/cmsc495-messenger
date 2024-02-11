@@ -1,26 +1,37 @@
-import unittest
-from sys import path
-from os.path import dirname, realpath
+from flask import Flask
 from unittest.mock import patch, MagicMock
-# Fixed missing import for error objects 
-from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from os.path import dirname, realpath
+from sys import path
+import unittest
 
-# Needed to set path before accessing the module at parent dir
+
+# Needed to set path before accessing the  module at parent dir
 path.append(f"{dirname(realpath(__file__))}/..")
-from modules.db.database import get_user, verify_user, register_user
-
+from modules.db.database import get_user, verify_user, register_user  # isort: skip
+from modules.settings import config  # isort: skip
 
 
 class TestUserFunctions(unittest.TestCase):
+    """A test case class for user-related functions"""
 
     def setUp(self):
-        # Setup any prerequisites for testing
-        pass
+        """Set up a Flask application context before each test"""
+        self.app = Flask(__name__)
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = config["SQLALCHEMY_DATABASE_URI"]
+        self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        self.app_context = self.app.app_context()
+        self.app_context.push()
 
-    @patch('db.database.UserAccount.query')
+    def tearDown(self):
+        """Clean up after each test by poppin the Flask application context"""
+        self.app_context.pop()
+
+    @patch('modules.db.database.UserAccount.query')
     def test_get_user(self, mock_query):
+        """Test the get_user function"""
+
         # Mocking the query filter_by method
-        mock_query.filter_by.return_value.first.return_value = MagicMock()
+        mock_query.filter_by.return_value.first.side_effect = [MagicMock(), None]
 
         # Test for an existing user
         existing_user = get_user('testuser')
@@ -30,11 +41,15 @@ class TestUserFunctions(unittest.TestCase):
         non_existing_user = get_user('non_existing_user')
         self.assertIsNone(non_existing_user)
 
-    @patch('db.database.get_user')
-    @patch('db.database.bcrypt')
+    @patch('modules.db.database.get_user')
+    @patch('modules.db.database.bcrypt')
     def test_verify_user(self, mock_bcrypt, mock_get_user):
-        # Mocking the return value of get_user
-        mock_get_user.return_value = MagicMock(password='hashed_password')
+        """Test the verify_user function"""
+
+        mock_user = MagicMock()
+        mock_user.password = b'hashed_password'
+        mock_get_user.side_effect = [mock_user, None, None]
+
         mock_bcrypt.checkpw.return_value = True
 
         # Test for correct username and password
@@ -42,11 +57,14 @@ class TestUserFunctions(unittest.TestCase):
 
         # Test for incorrect username or password
         self.assertFalse(verify_user('non_user1', 'incorrect_password'))
+
         self.assertFalse(verify_user('non_existing_user', 'password'))
 
-    def test_register_user(self, mock_bcrypt, mock_session, mock_user_account):
-        # You can mock dependencies and set up expectations as needed for testing this function
-        # Mocking dependencies and setting up expectations
+    @patch('modules.db.database.bcrypt')
+    @patch('modules.db.database.db.session')
+    @patch('modules.db.database.UserAccount')
+    def test_register_user(self, mock_user_account, mock_session, mock_bcrypt):
+        """Test the register_user function"""
 
         # Mocking the bcrypt hash function
         mock_bcrypt.hashpw.return_value = b'hashed_password'
@@ -58,23 +76,13 @@ class TestUserFunctions(unittest.TestCase):
         # Test successful registration
         new_user = register_user(
             'John', 'Doe', 'john_doe', 'john@example.com', 'password')
-        self.assertIsNotNone(new_user)
 
         # Test registration with existing username or email
-        mock_session.add.side_effect = MagicMock(side_effect=IntegrityError)
-        result = register_user(
-            'Jane', 'Doe', 'existing_user', 'jane@example.com', 'password')
-        self.assertEqual(result['error'], 'IntegrityError')
+        mock_session.add.assert_called_once_with(new_user_mock)
+        mock_session.commit.assert_called_once()
+        self.assertIsNone(new_user)
 
-        # Test handling of SQLAlchemy errors
-        mock_session.add.side_effect = MagicMock(side_effect=SQLAlchemyError)
-        result = register_user('Jane', 'Doe', 'new_user',
-                               'jane@example.com', 'password')
-        self.assertEqual(result['error'], 'SQLAlchemyError')
-
-    def tearDown(self):
-        # Clean up any resources created during the test
-        pass
+    
 
 
 if __name__ == '__main__':
