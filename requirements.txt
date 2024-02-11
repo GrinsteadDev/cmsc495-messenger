@@ -1,5 +1,3 @@
-# Required because of the dependencies in psycopg2,bcrypt, and sqlalchemy
-CMake
 # Project Dependencies
 Flask==2.2
 Werkzeug==2.2.2
@@ -7,4 +5,5 @@ GitPython==3.1.40
 SQLAlchemy==2.0.25
 Flask-SQLAlchemy==3.0.3
 psycopg2==2.9.9
+# Prerequisite for bcrpyt
 bcrypt==4.1.2
