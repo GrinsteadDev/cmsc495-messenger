@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = window.axios;
 
 async function getChatRooms() {
     try {
@@ -40,6 +40,21 @@ async function sendMessage(roomId, userName, message) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  const sendMessageForm = document.getElementById('sendMessageForm');
+  if (sendMessageForm) {
+    sendMessageForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(sendMessageForm);
+      const roomId = formData.get('roomId');
+      const userName = formData.get('userName');
+      const message = formData.get('message');
+      await sendMessage(roomId, userName, message);
+      document.getElementById('message').value = '';
+    });
+  }
+});
+
 async function peekMessage() {
     try {
       const response = await axios.get('/api/peek-message');
@@ -70,6 +85,19 @@ async function createRoom(roomName, userName) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  const createRoomForm = document.getElementById('createRoomForm');
+  if (createRoomForm) {
+    createRoomForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(createRoomForm);
+      const roomName = formData.get('roomName');
+      const userName = formData.get('userName');
+      await createRoom(roomName, userName);
+    });
+  }
+});
+
 async function deleteRoom(roomId) {
     try {
       const response = await axios.post('/api/delete-room', {
@@ -80,3 +108,14 @@ async function deleteRoom(roomId) {
       console.error(error);
     }
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const deleteRoomButton = document.getElementById('deleteRoomButton');
+  if (deleteRoomButton) {
+    deleteRoomButton.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const roomId = deleteRoomButton.getAttribute('data-room-id');
+      await deleteRoom(roomId);
+    });
+  }
+});

@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = window.axios;
 
 async function updateSetting(settingId, settingValue) {
     try {
@@ -10,3 +10,16 @@ async function updateSetting(settingId, settingValue) {
       console.error(error);
     }
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const updateSettingForm = document.getElementById('updateSettingForm');
+  if (updateSettingForm) {
+    updateSettingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(updateSettingForm);
+      const settingId = formData.get('settingId');
+      const settingValue = formData.get('settingValue');
+      await updateSetting(settingId, settingValue);
+    });
+  }
+});
