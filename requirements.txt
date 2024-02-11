@@ -4,6 +4,8 @@ Werkzeug==2.2.2
 GitPython==3.1.40
 SQLAlchemy==2.0.25
 Flask-SQLAlchemy==3.0.3
-psycopg2==2.9.9
+# Prerequiste for psycopg2
+psycopg2_binary==2.8.4
+psycopg2==2.8.4
 # Prerequisite for bcrpyt
 bcrypt==4.1.2
