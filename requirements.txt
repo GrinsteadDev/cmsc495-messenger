@@ -6,5 +6,6 @@ SQLAlchemy==2.0.25
 Flask-SQLAlchemy==3.0.3
 # Installing psycopg2_binary instead of psycopg2
 psycopg2_binary==2.8.4
-# No rust perequisite for bcrpyt when using <=3.2.2
-bcrypt==3.2.2
+# Host provider will not support dependencies for bcrypt
+# requiring passlib instead
+passlib==1.7.4
