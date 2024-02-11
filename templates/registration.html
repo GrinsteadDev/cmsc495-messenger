@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Lobby{% endblock %}
+{% block title %}Registration{% endblock %}
 
 {% block html_head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/registration/style.css') }}" />
@@ -40,7 +40,7 @@
             </div>
             
             <button type="submit" class="button-dark">Submit</button>
-            <button type="button" class="button-dark" onclick="location.href='{{ url_for('index') }}'">Cancel</button>
+            <button type="button" class="button-dark" onclick="location.href='{{ url_for('fetch_templates') }}'">Cancel</button>
         </form>
         <div class="text-wrapper-6">Registration</div>
     </div>

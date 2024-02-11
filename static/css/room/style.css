@@ -15,7 +15,7 @@
 .macbook-pro .overlap-group {
   position: relative;
   height: 979px;
-  background-image: url(./img/rectangle-1.svg);
+  background-image: url(/static/img/room/rectangle-1.svg);
   background-size: 100% 100%;
 }
 
@@ -106,7 +106,7 @@
   height: 33px;
   top: 8px;
   left: 1474px;
-  background-image: url(./img/background-1.svg);
+  background-image: url(/static/img/room/background-1.svg);
   background-size: 100% 100%;
 }
 
@@ -235,7 +235,7 @@
   height: 642px;
   top: 161px;
   left: 352px;
-  background-image: url(./img/rectangle-2.svg);
+  background-image: url(/static/img/room/rectangle-2.svg);
   background-size: 100% 100%;
 }
 
@@ -292,7 +292,7 @@
 
 .macbook-pro .element-avatars {
   top: 298px;
-  background-image: url(./img/avatars-3d-avatar-24.png);
+  background-image: url(/static/img/room/avatars-3d-avatar-24.png);
   position: absolute;
   width: 40px;
   height: 40px;
@@ -391,7 +391,7 @@
 
 .macbook-pro .element-d-avatars {
   top: 190px;
-  background-image: url(./img/avatars-3d-avatar-23.png);
+  background-image: url(/static/img/room/avatars-3d-avatar-23.png);
   position: absolute;
   width: 40px;
   height: 40px;
@@ -402,7 +402,7 @@
 
 .macbook-pro .element-avatars-2 {
   top: 82px;
-  background-image: url(./img/avatars-3d-avatar-23.png);
+  background-image: url(/static/img/room/avatars-3d-avatar-23.png);
   position: absolute;
   width: 40px;
   height: 40px;
@@ -413,7 +413,7 @@
 
 .macbook-pro .element-avatars-3 {
   top: 136px;
-  background-image: url(./img/avatars-3d-avatar-24.png);
+  background-image: url(/static/img/room/avatars-3d-avatar-24.png);
   position: absolute;
   width: 40px;
   height: 40px;

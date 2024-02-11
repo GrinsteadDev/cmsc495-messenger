@@ -28,7 +28,7 @@
   height: 76px;
   top: 199px;
   left: 366px;
-  background-image: url(./img/avatars-3d-avatar-1.png);
+  background-image: url(/static/img/Settings_UO/avatars-3d-avatar-1.png);
   position: absolute;
   background-size: cover;
   background-position: 50% 50%;
@@ -57,7 +57,7 @@
   height: 76px;
   top: 199px;
   left: 726px;
-  background-image: url(./img/avatars-3d-avatar-26.png);
+  background-image: url(/static/img/Settings_UO/avatars-3d-avatar-26.png);
   position: absolute;
   background-size: cover;
   background-position: 50% 50%;
@@ -68,7 +68,7 @@
   height: 76px;
   top: 95px;
   left: 726px;
-  background-image: url(./img/avatars-3d-avatar-24.png);
+  background-image: url(/static/img/Settings_UO/avatars-3d-avatar-24.png);
   position: absolute;
   background-size: cover;
   background-position: 50% 50%;
@@ -79,7 +79,7 @@
   height: 76px;
   top: 96px;
   left: 608px;
-  background-image: url(./img/avatars-3d-avatar-30.png);
+  background-image: url(/static/img/Settings_UO/avatars-3d-avatar-30.png);
   position: absolute;
   background-size: cover;
   background-position: 50% 50%;
@@ -90,7 +90,7 @@
   height: 71px;
   top: 97px;
   left: 487px;
-  background-image: url(./img/avatars-3d-avatar-13.png);
+  background-image: url(/static/img/Settings_UO/avatars-3d-avatar-13.png);
   position: absolute;
   background-size: cover;
   background-position: 50% 50%;

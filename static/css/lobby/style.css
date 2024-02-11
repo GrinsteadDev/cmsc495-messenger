@@ -151,7 +151,7 @@
   height: 33px;
   top: 8px;
   left: 1280px;
-  background-image: url(./img/background.svg);
+  background-image: url(/static/img/lobby/background.svg);
   background-size: 100% 100%;
 }
 

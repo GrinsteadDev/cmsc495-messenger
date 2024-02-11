@@ -1,72 +1,68 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="globals.css" />
-    <link rel="stylesheet" href="styleguide.css" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="macbook-pro">
-      <div class="div">
-        <div class="overlap-group">
-          <div class="element-avatars"></div>
-          <img class="avatars-avatar" src="img/avatars-3d-avatar-2.png" />
-          <img class="avatars-d-avatar" src="img/avatars-3d-avatar-3.png" />
-          <div class="element-d-avatars"></div>
-          <div class="element-avatars-2"></div>
-          <div class="element-avatars-3"></div>
-          <div class="element-avatars-4"></div>
-          <img class="img" src="img/avatars-3d-avatar-21.png" />
-          <div class="text-wrapper">User Picture</div>
-          <div class="overlap">
-            <div class="menu-dark">
-              <div class="menu-list">
-                <div class="menu-list-item"></div>
-                <div class="menu-list-item">
-                  <div class="state-layer">
-                    <div class="content"><div class="label-text"></div></div>
-                  </div>
-                </div>
-                <div class="menu-list-item">
-                  <div class="state-layer">
-                    <div class="content"><div class="label-text-2">User Options</div></div>
-                  </div>
-                </div>
-                <div class="menu-list-item">
-                  <div class="state-layer">
-                    <div class="content"><div class="label-text"></div></div>
-                  </div>
-                </div>
-                <div class="menu-list-item">
-                  <div class="state-layer">
-                    <div class="content-2"><div class="label-text-2">Notifications</div></div>
-                  </div>
-                </div>
-                <div class="menu-list-item">
-                  <div class="state-layer">
-                    <div class="content"><div class="label-text-2"></div></div>
-                  </div>
-                </div>
-                <div class="menu-list-item">
-                  <div class="state-layer">
-                    <div class="content"><div class="label-text-2">Theme</div></div>
-                  </div>
-                </div>
-                <div class="menu-list-item"></div>
-                <div class="menu-list-item"></div>
+{% extends 'base.html' %}
+{% block title %}User Options Settings{% endblock %}
+{% block html_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/Settings_UO/style.css') }}" />
+{% endblock %}
+{% block html_body %}
+<div class="macbook-pro">
+  <div class="div">
+    <div class="overlap-group">
+      <div class="element-avatars"></div>
+      <img class="avatars-avatar" src="{{ url_for('static', filename='img/Settings_UO/avatars-3d-avatar-2.png') }}" />
+      <img class="avatars-d-avatar" src="{{ url_for('static', filename='img/Settings_U/avatars-3d-avatar-3.png') }}" />
+      <div class="element-d-avatars"></div>
+      <div class="element-avatars-2"></div>
+      <div class="element-avatars-3"></div>
+      <div class="element-avatars-4"></div>
+      <img class="img" src="{{ url_for('static', filename='img/Settings_U/avatars-3d-avatar-21.png') }}" />
+      <div class="text-wrapper">User Picture</div>
+      <div class="overlap">
+        <div class="menu-dark">
+          <div class="menu-list">
+            <div class="menu-list-item"></div>
+            <div class="menu-list-item">
+              <div class="state-layer">
+                <div class="content"><div class="label-text"></div></div>
               </div>
             </div>
-            <div class="section-header">
-              <div class="left"><div class="label"></div></div>
+            <div class="menu-list-item">
+              <div class="state-layer">
+                <div class="content"><div class="label-text-2">User Options</div></div>
+              </div>
             </div>
+            <div class="menu-list-item">
+              <div class="state-layer">
+                <div class="content"><div class="label-text"></div></div>
+              </div>
+            </div>
+            <div class="menu-list-item">
+              <div class="state-layer">
+                <div class="content-2"><div class="label-text-2">Notifications</div></div>
+              </div>
+            </div>
+            <div class="menu-list-item">
+              <div class="state-layer">
+                <div class="content"><div class="label-text-2"></div></div>
+              </div>
+            </div>
+            <div class="menu-list-item">
+              <div class="state-layer">
+                <div class="content"><div class="label-text-2">Theme</div></div>
+              </div>
+            </div>
+            <div class="menu-list-item"></div>
+            <div class="menu-list-item"></div>
           </div>
-          <div class="headline">User Options</div>
         </div>
-        <div class="text-wrapper-2">Settings</div>
-        <img class="rectangle" src="img/rectangle-1.svg" />
-        <img class="rectangle-2" src="img/rectangle-2.png" />
+        <div class="section-header">
+          <div class="left"><div class="label"></div></div>
+        </div>
       </div>
+      <div class="headline">User Options</div>
     </div>
-  </body>
-</html>
+    <div class="text-wrapper-2">Settings</div>
+    <img class="rectangle" src="{{ url_for('static', filename='img/Settings_U/rectangle-1.svg') }}" />
+    <img class="rectangle-2" src="{{ url_for('static', filename='img/Settings_U/rectangle-2.png') }}" />
+  </div>
+</div>
+{% endblock %}
