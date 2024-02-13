@@ -7,42 +7,64 @@
 {% endblock %}
 
 {% block html_body %}
-<div class="macbook-pro">
-    <div class="div">
-        <form method="POST" action="{{ url_for('api.register_user') }}" class="overlap-group">
+<div class="body-container">
+    <div>
+        <div class="title-text-wrapper">Registration</div>
+        <div class="overlap-group">
             <div class="basic-dialog-dark">
                 <div class="text-content">
                     <div class="title-description">
                         <div class="headline">Create an Account</div>
                         <p class="supporting-text">Complete this registration in order to create an account.</p>
                     </div>
+                    <!-- Form Start -->
+                    <form class="form-content" method="POST" action="{{ url_for('api.register_user') }}">
+                        <div class="input-chip-dark">
+                            <label for="email" class="label-text-wrapper">
+                                <div class="text-wrapper">Email :</div>
+                            </label>
+                            <input autocomplete="email" class="input-text" type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="input-chip-dark">
+                            <label for="username" class="label-text-wrapper">
+                                <div class="text-wrapper">User Name :</div>
+                            </label>
+                            <input autocomplete="username" class="input-text" type="text" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="input-chip-dark">
+                            <label for="name" class="label-text-wrapper">
+                                <div class="text-wrapper">First Name :</div>
+                            </label>
+                            <input autocomplete="given-name" class="input-text" type="text" name="name" placeholder="First NName" required>
+                        </div>
+                        <div class="input-chip-dark">
+                            <label for="lastname" class="label-text-wrapper">
+                                <div class="text-wrapper">Last Name :</div>
+                            </label>
+                            <input autocomplete="family-name" class="input-text" type="text" name="lastname" placeholder="Last Name" required>
+                        </div>
+                        <div class="input-chip-dark">
+                            <label for="password" class="label-text-wrapper">
+                                <div class="text-wrapper">Password :</div>
+                            </label>
+                            <input type="password" class="input-text" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="input-chip-dark">
+                            <label for="password_confirm" class="label-text-wrapper">
+                                <div class="text-wrapper">Confirm Password :</div>
+                            </label>
+                            <input type="password" class="input-text" name="password_confirm" placeholder="Re-enter Password" required>
+                        </div>
+                        <button type="submit" class="button-dark">
+                            <div class="state-layer"><div class="label-text">Submit</div></div>
+                        </button>
+                    </form>
+                    <button type="button" class="button-dark">
+                        <div class="state-layer"><a href="{{ url_for('fetch_templates', name='login') }}" class="label-text">Cancel</div></div>
+                    </button>
                 </div>
             </div>
-            
-            <div class="input-chip-dark">
-                <input type="email" name="email" placeholder="Email" required>
-            </div>
-            
-            <div class="input-chip-dark-4">
-                <input type="text" name="username" placeholder="Username" required>
-            </div>
-            
-            <div class="input-chip-dark-3">
-                <input type="text" name="name" placeholder="First and Last Name" required>
-            </div>
-            
-            <div class="input-chip-dark-2">
-                <input type="password" name="password" placeholder="Password" required>
-            </div>
-            
-            <div class="input-chip-dark-5">
-                <input type="password" name="password_confirm" placeholder="Re-enter Password" required>
-            </div>
-            
-            <button type="submit" class="button-dark">Submit</button>
-            <button type="button" class="button-dark" onclick="location.href='{{ url_for('fetch_templates') }}';">Cancel</button>
-        </form>
-        <div class="text-wrapper-6">Registration</div>
+        </div>
     </div>
 </div>
 {% endblock %}
