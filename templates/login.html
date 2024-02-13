@@ -4,6 +4,7 @@
 
 {% block html_head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/login/style.css') }}" />
+<script src="{{ url_for('static', filename='js/authentication/authentication.js') }}" defer></script>
 {% endblock %}
 
 {% block html_body %}
@@ -23,13 +24,13 @@
                             <label for="username" class="label-text-wrapper">
                                 <div class="text-wrapper">User Name :</div>
                             </label>
-                            <input class="input-text" type="text" id="username" name="username" placeholder="Enter your username" autocomplete="username" required>
+                            <input class="input-text" type="text" id="username" name="username" placeholder="Enter your username" autocomplete="username" required />
                         </div>
                         <div class="input-chip-dark">
                             <label for="password" class="label-text-wrapper">
                                 <div class="text-wrapper">Password :</div>
                             </label>
-                            <input  class="input-text" type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+                            <input  class="input-text" type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required />
                         </div>
                         <button type="submit" class="button-dark">
                             <div class="state-layer"><div class="label-text">Login</div></div>
