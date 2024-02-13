@@ -2,15 +2,23 @@ const axios = window.axios;
 
 async function registerUser(firstName, lastName, userName, userEmail, userPassword){
   try {
-    const response = await axios.post('/api/register', {
-      firstName,
-      lastName,
-      userName,
-      userEmail,
-      userPassword
-    });
+    const response = await axios.post(
+      '/api/register',
+      {
+        'first-name': firstName,
+        'last-name': lastName,
+        'username': userName,
+        'email': userEmail,
+        'password': userPassword
+      },
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+    );
     console.log(response.data);
-    } catch (error) {
+  } catch (error) {
     console.error(error);
   }
 }
@@ -21,11 +29,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(form);
-      const firstName = formData.get('firstName');
-      const lastName = formData.get('lastName');
-      const userName = formData.get('userName');
-      const userEmail = formData.get('userEmail');
-      const userPassword = formData.get('userPassword');
+      const firstName = formData.get('firstname');
+      const lastName = formData.get('lastname');
+      const userName = formData.get('username');
+      const userEmail = formData.get('email');
+      const userPassword = formData.get('password');
       await registerUser(firstName, lastName, userName, userEmail, userPassword);
     });
   }
@@ -33,11 +41,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 async function login(userName, password, status = 'active') {
   try {
-    const response = await axios.post('/api/login', {
-      username: userName,
-      password,
-      status
-    });
+    const response = await axios.post(
+      '/api/login',
+      {
+        username: userName,
+        password: password,
+        status: status
+      }, 
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+    );
     console.log(response.data);
   } catch (error) {
     console.error(error);
@@ -50,7 +66,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(loginForm);
-      const userName = formData.get('userName');
+      const userName = formData.get('username');
       const password = formData.get('password');
       await login(userName, password);
     });
