@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %}Lobby{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block html_head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/login/style.css') }}" />
 {% endblock %}
 
 {% block html_body %}
-<div class="macbook-pro">
-    <div class="div">
+<div class="body-container">
+    <div>
+        <div class="text-wrapper-3">Banter Box</div>
         <div class="overlap-group">
             <div class="basic-dialog-dark">
                 <div class="text-content">
@@ -17,29 +18,30 @@
                         <p class="supporting-text">Sign in to your Banter Box Account</p>
                     </div>
                     <!-- Start of form -->
-                    <form method="POST" action="{{ url_for('api.user_login') }}">
+                    <form class="form-content" method="POST" action="{{ url_for('api.user_login') }}">
                         <div class="input-chip-dark">
                             <label for="username" class="label-text-wrapper">
                                 <div class="text-wrapper">User Name :</div>
                             </label>
-                            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                            <input class="input-text" type="text" id="username" name="username" placeholder="Enter your username" autocomplete="username" required>
                         </div>
-                        <div class="input-chip-dark-2">
+                        <div class="input-chip-dark">
                             <label for="password" class="label-text-wrapper">
                                 <div class="text-wrapper">Password :</div>
                             </label>
-                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                            <input  class="input-text" type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
                         </div>
-                        <button type="submit" class="button-dark">Login</button>
+                        <button type="submit" class="button-dark">
+                            <div class="state-layer"><div class="label-text">Login</div></div>
+                        </button>
                     </form>
                     <!-- End of form -->
                     <button class="button-dark">
-                        <div class="state-layer"><div class="label-text">Register</div></div>
+                        <div class="state-layer"><a href="{{ url_for('fetch_templates', name='registration') }}" class="label-text">Register</div></div>
                     </button>
                 </div>
             </div>
         </div>
-        <div class="text-wrapper-3">Banter Box</div>
     </div>
 </div>
 {% endblock %}

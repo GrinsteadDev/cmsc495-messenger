@@ -1,9 +1,31 @@
+{# Sets the variables for reuse from the requested block statements #}
+{% set title_s %}{% block title %}{{ request_name }}{% endblock %}{% endset %}
+{% set description_s %}{% block description %}{% endblock %}{% endset %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- For Google -->
+    <meta name="description" content="{{ description_s }}" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="copyright" content="" />
+    <meta name="application-name" content="" />
+    <!-- For Facebook -->
+    <meta property="og:title" content="{{ title_s }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="{{ request_url }}" />
+    <meta property="og:description" content="{{ description_s }}" />
+    <!-- For Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{ title_s }}" />
+    <meta name="twitter:description" content="{{ description_s }}" />
+    <meta name="twitter:image" content="" />
+    <!-- Title -->
+    <title>{{ title_s }}</title>
     {% block metadata %}{% endblock %}
-    <title>{% block title %}{% endblock %}</title>
     {% for x in get_required_js() %}
     <script src="{{ url_for('static', filename=x) }}" defer></script>
     {% endfor %}

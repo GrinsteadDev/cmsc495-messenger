@@ -1,3 +1,23 @@
+/*
+* Author: Phill 
+* Date: 
+* Generated From: 
+* 
+* Code refactor to become device independent 02-13-2024 by Devin Grinstead
+* Change Log
+*   removed .mackbook-pro selector
+*   changed values from pixels to em (font-units)
+*   moved common code to a goble style.css file
+* Affected Files:
+*   /css/required/basestyle.css
+*   /css/lobby/style.css
+*   /css/login/style.css
+*   /css/registration/style.css
+*   /css/room/style.css
+*   /css/Settings_notifications/style.css
+*   /css/Settings_theme/style.css
+*   /css/Settings_UO/style.css
+*/
 .macbook-pro {
   background-color: #000000;
   display: flex;

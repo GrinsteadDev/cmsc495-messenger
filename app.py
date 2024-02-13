@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from git import Repo
 import jinja2
 # Custom Modules located at ./modules/*
@@ -22,7 +22,7 @@ def fetch_templates(name, ext):
     # Fetches a template as a webpage url or returns 404
     if ext in ["", "html", "htm"] and not settings.match_file_blacklist(name=f"{name}.*"):
         try:
-            return render_template(f"{name}.html")
+            return render_template(f"{name}.html", request_name=name, request_url=request.base_url)
         except jinja2.exceptions.TemplateNotFound as e:
             pass
 
