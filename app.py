@@ -1,7 +1,20 @@
+"""
+Purpose:
+   Banter Box Web Application Main Entry Point
+Date:
+   
+Contributors:
+   Devin Grinstead
+   
+Methods:
+   
+Objects:
+   app - the Flask object.
+"""
 import os
 from flask import Flask, render_template, request
 from git import Repo
-import jinja2
+from jinja2.exceptions import TemplateNotFound
 # Custom Modules located at ./modules/*
 from modules import settings
 from modules.rest import api
@@ -23,7 +36,7 @@ def fetch_templates(name, ext):
     if ext in ["", "html", "htm"] and not settings.match_file_blacklist(name=f"{name}.*"):
         try:
             return render_template(f"{name}.html", request_name=name, request_url=request.base_url)
-        except jinja2.exceptions.TemplateNotFound as e:
+        except TemplateNotFound as e:
             pass
 
     return "", 404
