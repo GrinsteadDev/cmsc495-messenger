@@ -7,7 +7,7 @@ def sample():
     """
     """
 
-@api_blueprint.route("/api/register", methods=['GET'])
+@api_blueprint.route("/api/register", methods=['POST'])
 def register_user():
     first_name = request.form.get('first-name')
     last_name = request.form.get('last-name')
