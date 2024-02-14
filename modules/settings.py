@@ -1,9 +1,27 @@
-from typing import Collection
+"""
+
+"""
+from datetime import timedelta
 from fnmatch import fnmatch
 
 config = {
-    "SQLALCHEMY_DATABASE_URI": 'postgresql://dbadmin:dbadmin@localhost/cmsc495messenger_db',
-    "SQLALCHEMY_TRACK_MODIFICATIONS": False
+    'DEBUG': False,
+    # DB URL FORMAT 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'
+    # TODO setup ENV Varibles for db user
+    'SQLALCHEMY_DATABASE_URI': 'postgresql://dbadmin:dbadmin@localhost/cmsc495messenger_db',
+    'SQLALCHEMY_TRACK_MODIFICATIONS': False,
+    'SESSION_COOKIE_NAME': 'SESSidxbanterboxFLASKAPI',
+    'SESSION_COOKIE_DOMAIN': 'messenger.dgwebllc.com',
+    'PERMANENT_SESSION_LIFETIME': timedelta(minutes=15),
+    'SESSION_TYPE': 'SqlAlchemySessionInterface',
+}
+
+debug_config = {
+    # Unsets the domain for use locally
+    'SESSION_COOKIE_DOMAIN': None,
+    # Runs in debug mode
+    'EXPLAIN_TEMPLATE_LOADING': True,
+    'DEBUG': True,
 }
 
 file_blacklist = [

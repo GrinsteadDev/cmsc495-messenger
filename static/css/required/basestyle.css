@@ -20,7 +20,7 @@ button, input[type="button"] {
     text-align: center;
     position: relative;
     background-image: url(/static/img/background.svg);
-    background-attachment: scroll;
+    background-attachment: fixed;
     background-clip: padding-box;
     background-position: center;
     background-repeat: no-repeat;

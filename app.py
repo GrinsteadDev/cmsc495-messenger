@@ -20,10 +20,12 @@ from modules import settings
 from modules.rest import api
 from modules.template_extensions import extension
 from modules.db.db import init_app as init_db
+from modules.session_handler.mysession import init_sess
 
 app = Flask(__name__)
 app.config.update(settings.config)
 init_db(app)
+init_sess(app)
 app.register_blueprint(api.api_blueprint)
 app.jinja_env.globals.update(extension.template_extensions)
 
@@ -62,4 +64,8 @@ def update_repository():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    """
+    Only called when run during local execution or app debug
+    """
+    app.config.update(settings.debug_config)
+    app.run()

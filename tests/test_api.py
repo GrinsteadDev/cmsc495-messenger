@@ -13,11 +13,17 @@ Objects:
 """
 
 import pytest
-from Flask import api_blueprint
+from os.path import dirname, realpath
+from sys import path
+# Needed to set path before accessing the  module at parent dir
+path.append(f"{dirname(realpath(__file__))}/..")
+from app import app as flask_app
+from modules.settings import debug_config
 
 @pytest.fixture
 def app():
-    app = api_blueprint
+    flask_app.config.update(debug_config)
+    app = flask_app
     app.testing = True
     return app
 
