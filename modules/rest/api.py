@@ -1,3 +1,17 @@
+"""
+Purpose:
+   Banter Box Web Application Main API endpoints
+Date:
+   
+Contributors:
+   Catherine Casey
+   
+Methods:
+   
+Objects:
+   app - the Flask object.
+"""
+
 from flask import Blueprint, request, jsonify
 
 api_blueprint = Blueprint('api', __name__)
