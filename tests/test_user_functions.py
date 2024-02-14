@@ -6,7 +6,7 @@ import unittest
 
 
 # Needed to set path before accessing the  module at parent dir
-path.append(f"{dirname(realpath(__file__))}/..")
+path.append(f"{dirname(realpath(__file__))}/../")
 from modules.db.database import get_user, verify_user, register_user  # isort: skip
 from modules.settings import config  # isort: skip
 
