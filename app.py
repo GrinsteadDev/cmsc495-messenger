@@ -30,7 +30,7 @@ app.register_blueprint(api.api_blueprint)
 app.jinja_env.globals.update(extension.template_extensions)
 
 
-@app.route("/", defaults={"name": "home", "ext": "html"})
+@app.route("/", defaults={"name": "login", "ext": "html"})
 @app.route("/<string:name>", defaults={"ext": ""})
 @app.route("/<string:name>.<string:ext>")
 def fetch_templates(name, ext):
