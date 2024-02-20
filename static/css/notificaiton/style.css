@@ -1,0 +1,168 @@
+.macbook-pro {
+  background-color: #000000;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.macbook-pro .div {
+  background-color: #000000;
+  width: 1512px;
+  height: 982px;
+  position: relative;
+}
+
+.macbook-pro .overlap-group {
+  position: absolute;
+  width: 507px;
+  height: 218px;
+  top: 339px;
+  left: 513px;
+}
+
+.macbook-pro .rectangle {
+  position: absolute;
+  width: 457px;
+  height: 218px;
+  top: 0;
+  left: 25px;
+  background-color: #4d4949;
+  border-radius: 30px;
+}
+
+.macbook-pro .divider {
+  position: absolute;
+  width: 320px;
+  height: 1px;
+  top: 46px;
+  left: 94px;
+  object-fit: cover;
+}
+
+.macbook-pro .headline {
+  position: absolute;
+  width: 136px;
+  height: 16px;
+  top: 164px;
+  left: 246px;
+  font-family: var(--m3-headline-small-font-family);
+  font-weight: var(--m3-headline-small-font-weight);
+  color: var(--m3sysdarkon-surface);
+  font-size: var(--m3-headline-small-font-size);
+  text-align: center;
+  letter-spacing: var(--m3-headline-small-letter-spacing);
+  line-height: var(--m3-headline-small-line-height);
+  white-space: nowrap;
+  font-style: var(--m3-headline-small-font-style);
+}
+
+.macbook-pro .text-wrapper {
+  width: 89px;
+  height: 15px;
+  top: 164px;
+  left: 146px;
+  color: var(--m3sysdarkon-surface);
+  white-space: nowrap;
+  position: absolute;
+  font-family: var(--m3-headline-small-font-family);
+  font-weight: var(--m3-headline-small-font-weight);
+  font-size: var(--m3-headline-small-font-size);
+  text-align: center;
+  letter-spacing: var(--m3-headline-small-letter-spacing);
+  line-height: var(--m3-headline-small-line-height);
+  font-style: var(--m3-headline-small-font-style);
+}
+
+.macbook-pro .headline-2 {
+  width: 100px;
+  height: 15px;
+  top: 104px;
+  left: 256px;
+  color: var(--m3sysdarkon-surface);
+  white-space: nowrap;
+  position: absolute;
+  font-family: var(--m3-headline-small-font-family);
+  font-weight: var(--m3-headline-small-font-weight);
+  font-size: var(--m3-headline-small-font-size);
+  text-align: center;
+  letter-spacing: var(--m3-headline-small-letter-spacing);
+  line-height: var(--m3-headline-small-line-height);
+  font-style: var(--m3-headline-small-font-style);
+}
+
+.macbook-pro .headline-3 {
+  width: 89px;
+  height: 15px;
+  top: 104px;
+  left: 151px;
+  color: var(--m3sysdarkon-surface);
+  white-space: nowrap;
+  position: absolute;
+  font-family: var(--m3-headline-small-font-family);
+  font-weight: var(--m3-headline-small-font-weight);
+  font-size: var(--m3-headline-small-font-size);
+  text-align: center;
+  letter-spacing: var(--m3-headline-small-letter-spacing);
+  line-height: var(--m3-headline-small-line-height);
+  font-style: var(--m3-headline-small-font-style);
+}
+
+.macbook-pro .headline-4 {
+  width: 507px;
+  height: 32px;
+  top: 14px;
+  left: 0;
+  color: var(--m3sysdarksurface-tint);
+  position: absolute;
+  font-family: var(--m3-headline-small-font-family);
+  font-weight: var(--m3-headline-small-font-weight);
+  font-size: var(--m3-headline-small-font-size);
+  text-align: center;
+  letter-spacing: var(--m3-headline-small-letter-spacing);
+  line-height: var(--m3-headline-small-line-height);
+  font-style: var(--m3-headline-small-font-style);
+}
+
+.macbook-pro .overlap {
+  position: absolute;
+  width: 1512px;
+  height: 81px;
+  top: 0;
+  left: 0;
+}
+
+.macbook-pro .state-layer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--m3state-layerslightinverse-primaryopacity-012);
+}
+
+.macbook-pro .label-text {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: var(--m3-label-large-font-family);
+  font-weight: var(--m3-label-large-font-weight);
+  color: var(--m3syslightinverse-primary);
+  font-size: var(--m3-label-large-font-size);
+  text-align: center;
+  letter-spacing: var(--m3-label-large-letter-spacing);
+  line-height: var(--m3-label-large-line-height);
+  white-space: nowrap;
+  font-style: var(--m3-label-large-font-style);
+}
+
+.macbook-pro .img {
+  position: absolute;
+  width: 1512px;
+  height: 86px;
+  top: 896px;
+  left: 0;
+}
