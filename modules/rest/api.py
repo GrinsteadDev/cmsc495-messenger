@@ -13,6 +13,7 @@ Objects:
 """
 
 from flask import Blueprint, request, jsonify
+from modules.session_handler import mysession
 
 api_blueprint = Blueprint('api', __name__)
 
@@ -151,7 +152,7 @@ def send_message():
     response = {
         'message': 'Message sent successfully',
         'user_id': user_id,
-        'message': message,
+        'message_content': message,
         'timestamp': timestamp
     }
 
@@ -185,7 +186,7 @@ def create_room():
 
     # Dummy response for logic to create room
     response = {
-        'message': f'Room "{room_name}" created successfully by user {creator_id}.',
+        'message': f'Room "{room_name}" created successfully by user {creator_id}',
         'room_name': room_name,
         'creator_id': creator_id
     }
@@ -200,7 +201,7 @@ def delete_room():
     admin_id = data.get('admin_id')
 
     response = {
-        'message': f'Room {room_id} deleted successfully by admin {admin_id}.',
+        'message': f'Room {room_id} deleted successfully by admin {admin_id}',
         'room_id': room_id,
         'admin_id': admin_id
     }
@@ -214,7 +215,7 @@ def update_setting(setting_id):
 
     # Dummy response for settings
     response = {
-        'message': f'Setting {setting_id} updated successfully.',
+        'message': f'Setting {setting_id} updated successfully',
         'setting_id': setting_id,
         'new_value': new_value
     }
@@ -227,7 +228,7 @@ def update_settings():
     new_value = request.form.get('<new-value>')
 
     response = {
-        'message': f'Setting {setting_id} updated successfully.',
+        'message': f'Setting {setting_id} updated successfully',
         'setting_id': setting_id,
         'new_value': new_value
     }
