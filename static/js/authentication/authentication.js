@@ -31,6 +31,7 @@ async function registerUser(firstName, lastName, userName, userEmail, userPasswo
     console.log(response.data);
   } catch (error) {
     console.error(error);
+    window.alert(error);
   }
 }
 
@@ -68,6 +69,7 @@ async function login(userName, password, status = 'active') {
     console.log(response.data);
   } catch (error) {
     console.error(error);
+    window.alert(error);
   }
 }
 
@@ -95,8 +97,10 @@ async function logout(logoutMessage = '') {
       }
     });
     console.log(response.data);
+    window.alert("Succesfully logged out.");
   } catch (error) {
     console.error(error);
+    window.alert(error);
   }
 }
 
