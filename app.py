@@ -24,11 +24,11 @@ from modules.session_handler.mysession import init_sess
 
 app = Flask(__name__)
 app.config.update(settings.config)
-init_db(app)
-init_sess(app)
 app.register_blueprint(api.api_blueprint)
 app.jinja_env.globals.update(extension.template_extensions)
 
+init_db(app)
+init_sess(app)
 
 @app.route("/", defaults={"name": "login", "ext": "html"})
 @app.route("/<string:name>", defaults={"ext": ""})
@@ -67,5 +67,5 @@ if __name__ == "__main__":
     """
     Only called when run during local execution or app debug
     """
-    app.config.update(settings.debug_config)
+    # app.config.update(settings.debug_config)
     app.run()

@@ -5,15 +5,15 @@ Date:
    
 Contributors:
    Catherine Casey
-   
+   Devin Grinstead - Ammened on 2-20-2024
 Methods:
    
 Objects:
    app - the Flask object.
 """
-
+# TODO Add comment docs
+from datetime import datetime
 from flask import Blueprint, request, jsonify
-from modules.session_handler import mysession
 
 api_blueprint = Blueprint('api', __name__)
 
@@ -29,20 +29,84 @@ def register_user():
     username = request.form.get('username')
     email = request.form.get('email')
     password = request.form.get('password')
-    status = request.form.get('status')
+    password_confim = request.form.get('password-confirm')
 
-
-    response = {
-        'message': 'User registered successfully',
-        'user_info': {
-            'first_name': first_name,
-            'last_name': last_name,
-            'username': username,
-            'email': email,
-            'status': status
+    # Verfiys that the passwords match
+    # TODO Add password complexity checks
+    if password_confim == password:
+        register_user_rp = db_register_user(first_name, last_name, username, email, password)
+        if register_user_rp is None:
+            response = {
+                'message': 'User registered successfully',
+                'user_info': {
+                    'first_name': first_name,
+                    'last_name': last_name,
+                    'username': username,
+                    'email': email,
+                    'status': 'active'
+                }
+            }
+        else:
+            response = {
+                'message': 'User Registration Failed'
+            }
+    else:
+        response = {
+            'message': 'Passwords must match'
         }
-    }
+    
+    return jsonify(response)
 
+@api_blueprint.route('/api/login', methods=['POST'])
+def user_login():
+    # Get data from the form
+    username = request.form.get('username')
+    password = request.form.get('password')
+
+    # Clears active session if any
+    mysession.clear()
+
+    # Check credentials on database
+    if db_verify_user(username, password):
+        # Updates user login
+        user = db_get_user(username)
+        user.last_login = datetime.now()
+        # Sets Session information
+        mysession.set('USER', username)
+        mysession.set('STATUS', 'logged-in')
+
+        response = {
+            'message': 'Login successful',
+            'user_info': {
+                'username': mysession.get('USER'),
+                'status': mysession.get('STATUS')
+            }
+        }
+        return jsonify(response)
+    else:
+        return jsonify({'error': 'Invalid credentials'}), 401  # Unauthorized status code
+
+@api_blueprint.route('/api/logout', methods=['POST'])
+def user_logout():
+    # User Authorization handled by session handler 'mysession'
+    # Authorization headers are used by .htaccess and apache. Making
+    # them rarely accessed from the code directly.
+    """
+    authorization_header = request.headers.get('Authorization')
+    if not authorization_header or not authorization_header.startswith('Bearer '):
+        return jsonify({'error': 'Unauthorized'}), 401  
+
+    access_token = authorization_header.split(' ')[1]
+
+    logout_message = request.form.get('message')
+    """
+
+    # Logout logic
+    # By clearing the session the user is affectively logged out
+    mysession.clear()
+    response = {
+        'message': 'Logout successful'
+    }
     return jsonify(response)
 
 # New route for email verification
@@ -53,48 +117,6 @@ def verify_email(verification_token):
         return jsonify({'message': 'Email verification successful'})
     else:
         return jsonify({'error': 'Invalid verification token'}), 400
-
-@api_blueprint.route('/api/login', methods=['POST'])
-def user_login():
-    # Get data from the form
-    username = request.form.get('username')
-    password = request.form.get('password')
-    status = request.form.get('status')
-
-    # Check credentials on database
-    if username == 'demo' and password == 'password':
-        response = {
-            'message': 'Login successful',
-            'user_info': {
-                'username': username,
-                'status': status
-            }
-        }
-        return jsonify(response)
-    else:
-        return jsonify({'error': 'Invalid credentials'}), 401  # Unauthorized status code
-
-@api_blueprint.route('/api/logout', methods=['POST'])
-def user_logout():
-
-    authorization_header = request.headers.get('Authorization')
-    if not authorization_header or not authorization_header.startswith('Bearer '):
-        return jsonify({'error': 'Unauthorized'}), 401  
-
-    access_token = authorization_header.split(' ')[1]
-
-    logout_message = request.form.get('message')
-
-    # Logout logic 
-    response = {
-        'message': 'Logout successful',
-        'logout_info': {
-            'access_token': access_token,
-            'logout_message': logout_message
-        }
-    }
-    return jsonify(response)
-
 
 @api_blueprint.route('/api/password-recovery', methods=['POST'])
 def password_recovery():
