@@ -1,3 +1,14 @@
+/*
+Purpose:
+   Settings
+   Client side functionality for settings management
+
+Contributors:
+   Michael Gurewitz
+   Devin Grinstead
+   
+*/
+
 const axios = window.axios;
 
 async function updateSetting(settingId, settingValue) {
