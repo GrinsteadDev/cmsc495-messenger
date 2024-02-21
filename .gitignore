@@ -397,3 +397,6 @@ env
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Python .env file
+*.env

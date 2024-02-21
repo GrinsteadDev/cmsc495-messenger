@@ -1,6 +1,6 @@
 const axios = window.axios;
 
-async function registerUser(firstName, lastName, userName, userEmail, userPassword){
+async function registerUser(firstName, lastName, userName, userEmail, userPassword, userPassword2){
   try {
     const response = await axios.post(
       '/api/register',
@@ -9,7 +9,8 @@ async function registerUser(firstName, lastName, userName, userEmail, userPasswo
         'last-name': lastName,
         'username': userName,
         'email': userEmail,
-        'password': userPassword
+        'password': userPassword,
+        'password-confirm': userPassword2
       },
       {
         headers: {
@@ -29,12 +30,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(form);
-      const firstName = formData.get('firstname');
-      const lastName = formData.get('lastname');
+      const firstName = formData.get('first-name');
+      const lastName = formData.get('last-name');
       const userName = formData.get('username');
       const userEmail = formData.get('email');
       const userPassword = formData.get('password');
-      await registerUser(firstName, lastName, userName, userEmail, userPassword);
+      const userPassword2 = formData.get('password-confirm')
+      await registerUser(firstName, lastName, userName, userEmail, userPassword, userPassword2);
     });
   }
 });
