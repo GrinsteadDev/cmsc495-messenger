@@ -1,3 +1,13 @@
+/*
+Purpose:
+   Chat
+   Client side functionality for chatting between users within rooms
+
+Contributors:
+   Michael Gurewitz
+   
+*/
+
 const axios = window.axios;
 
 async function getChatRooms() {

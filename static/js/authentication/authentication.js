@@ -1,3 +1,13 @@
+/*
+Purpose:
+   Authentication
+   Client side functionality for user authentication
+
+Contributors:
+   Michael Gurewitz
+   
+*/
+
 const axios = window.axios;
 
 async function registerUser(firstName, lastName, userName, userEmail, userPassword){
