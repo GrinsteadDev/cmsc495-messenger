@@ -93,7 +93,7 @@ file_blacklist = UpperMatchList([
     "head.html"
 ])
 
-def init_app_settings(app: Flask = None)-> Flask:
+def init_app_settings(app: Flask = None, debug: bool = False)-> Flask:
     """
     Initializes the Settings object and modules
 
@@ -101,8 +101,11 @@ def init_app_settings(app: Flask = None)-> Flask:
     """
     if app is None:
         app = Flask(__name__)
+    
+    if not debug:
+        debug = bool(environ.get('DEBUG', False))
 
-    if bool(environ.get('DEBUG', False)):
+    if debug:
         app.config.from_object(DebugConfig())
     else:
         app.config.from_object(ReleaseConfig())
