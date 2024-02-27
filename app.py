@@ -14,12 +14,13 @@ Objects:
     app - the Flask object.
 """
 import os
-from flask import Flask
+from flask import Flask, current_app
 from git import Repo
 # Custom Modules located at ./modules/*
 from modules.settings import init_app_settings, file_blacklist
 
 app = Flask(__name__)
+
 init_app_settings(app)
 
 @app.route("/git-push/", methods=['GET', 'POST'])
@@ -45,5 +46,4 @@ if __name__ == "__main__":
     """
     Only called when run during local execution or app debug
     """
-    # app.config.update(settings.debug_config)
     app.run()

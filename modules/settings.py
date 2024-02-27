@@ -87,6 +87,7 @@ class DebugConfig(BaseConfig):
     EXPLAIN_TEMPLATE_LOADING = True
     DEBUG = True
     TESTING = True
+    PRESERVE_CONTEXT_ON_EXCEPTION = False
 
 file_blacklist = UpperMatchList([
     "base.html",
@@ -102,18 +103,19 @@ def init_app_settings(app: Flask = None, debug: bool = False)-> Flask:
     if app is None:
         app = Flask(__name__)
     
-    if not debug:
-        debug = bool(environ.get('DEBUG', False))
+    with app.app_context():
+        if not debug:
+            debug = bool(environ.get('DEBUG', False))
 
-    if debug:
-        app.config.from_object(DebugConfig())
-    else:
-        app.config.from_object(ReleaseConfig())
+        if debug:
+            app.config.from_object(DebugConfig())
+        else:
+            app.config.from_object(ReleaseConfig())
 
-    set_file_blacklist(file_blacklist)
-    init_app_db(app)
-    init_app_sess(app)
-    init_app_template(app)
-    app.register_blueprint(app_blueprint)
+        set_file_blacklist(file_blacklist)
+        init_app_db(app)
+        init_app_sess(app)
+        init_app_template(app)
+        app.register_blueprint(app_blueprint)
 
     return app

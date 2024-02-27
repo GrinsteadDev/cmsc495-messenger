@@ -11,23 +11,18 @@ Methods:
 Objects:
    app - the Flask object/ Flask test client
 """
-
 import pytest
 from os.path import dirname, realpath
 from sys import path
-
 # Needed to set path before accessing the  module at parent dir
 path.append(f"{dirname(realpath(__file__))}/../")
-from app import app as flask_app
-from modules.settings import debug_config
+from modules.settings import init_app_settings
 
 print(__name__)
 
 @pytest.fixture
 def app():
-   # flask_app.config.update(debug_config)
-   app = flask_app
-   app.testing = True
+   app = init_app_settings(debug=True)
    return app
 
 @pytest.fixture

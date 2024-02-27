@@ -14,12 +14,12 @@ Methods:
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from flask import current_app
 import bcrypt
-from models import UserAccount, UserPermission, UserPermissionToRole, UserRoleAssignment
-from db.db import db
-
+from models import UserAccount, UserPermission, UserPermissionToRole, UserRoleAssignment, db
 
 def get_user(username):
     """Retrieve a user from the database by username"""
+    print(current_app.config)
+
     with current_app.app_context():
         user = UserAccount.query.filter_by(username=username).first()
     

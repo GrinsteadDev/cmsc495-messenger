@@ -51,6 +51,7 @@ def register_user():
                 }
             }
         else:
+            print(register_user_rp['message'])
             response = {
                 'message': 'User Registration Failed'
             }

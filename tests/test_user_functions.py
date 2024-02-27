@@ -8,7 +8,7 @@ import unittest
 # Needed to set path before accessing the  module at parent dir
 path.append(f"{dirname(realpath(__file__))}/../")
 from modules.db.database import get_user, verify_user, register_user  # isort: skip
-from modules.settings import config  # isort: skip
+from modules.settings import init_app_settings
 
 
 class TestUserFunctions(unittest.TestCase):
@@ -17,8 +17,7 @@ class TestUserFunctions(unittest.TestCase):
     def setUp(self):
         """Set up a Flask application context before each test"""
         self.app = Flask(__name__)
-        self.app.config['SQLALCHEMY_DATABASE_URI'] = config["SQLALCHEMY_DATABASE_URI"]
-        self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        init_app_settings(self.app)
         self.app_context = self.app.app_context()
         self.app_context.push()
 
