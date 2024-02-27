@@ -1,48 +1,26 @@
 """
 Purpose:
-   Banter Box Web Application Main Entry Point
-Date:
-   
+    Banter Box Web Application Main Entry Point
+Change Log:
+    Changed by Devin Grinstead on 02-27-2024
+        Refactored the app.py to use the init_app_settins method from modules.settings
+
 Contributors:
-   Devin Grinstead
-   
+    Devin Grinstead
+    Catherine Casey
 Methods:
-   
+
 Objects:
-   app - the Flask object.
+    app - the Flask object.
 """
 import os
-from flask import Flask, render_template, request
+from flask import Flask
 from git import Repo
-from jinja2.exceptions import TemplateNotFound
 # Custom Modules located at ./modules/*
-from modules import settings
-from modules.rest import api
-from modules.template_extensions import extension
-from modules.db.db import init_app as init_db
-from modules.session_handler.mysession import init_sess
+from modules.settings import init_app_settings, file_blacklist
 
 app = Flask(__name__)
-app.config.update(settings.config)
-app.register_blueprint(api.api_blueprint)
-app.jinja_env.globals.update(extension.template_extensions)
-
-init_db(app)
-init_sess(app)
-
-@app.route("/", defaults={"name": "login", "ext": "html"})
-@app.route("/<string:name>", defaults={"ext": ""})
-@app.route("/<string:name>.<string:ext>")
-def fetch_templates(name, ext):
-    # Fetches a template as a webpage url or returns 404
-    if ext in ["", "html", "htm"] and not settings.match_file_blacklist(name=f"{name}.*"):
-        try:
-            return render_template(f"{name}.html", request_name=name, request_url=request.base_url)
-        except TemplateNotFound as e:
-            pass
-
-    return "", 404
-
+init_app_settings(app)
 
 @app.route("/git-push/", methods=['GET', 'POST'])
 def update_repository():

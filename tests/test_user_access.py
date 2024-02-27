@@ -34,12 +34,6 @@ def app():
 def client(app):
    return app.test_client()
 
-@pytest.fixture
-def app_ctx(app):
-   with app.app_context():
-      yield
-
-@pytest.mark.usefixtures("app_ctx")
 def test_register_user(client):
    """
    Test registering a user
@@ -62,7 +56,6 @@ def test_register_user(client):
    assert json_data['user_info']['username'] == 'johndoe'
 
 '''
-@pytest.mark.usefixtures("app_ctx")
 def test_user_login(client):
    """
    Test user login with valid credentials
@@ -79,7 +72,6 @@ def test_user_login(client):
    assert json_data['message'] == 'Login successful'
    assert json_data['user_info']['username'] == 'johndoe'
 
-@pytest.mark.usefixtures("app_ctx")
 def test_user_logout(client):
    """
    Test user logout once logined

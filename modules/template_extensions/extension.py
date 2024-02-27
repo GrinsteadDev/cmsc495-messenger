@@ -1,6 +1,7 @@
 from os import listdir
 from os.path import isfile, join, exists, abspath, dirname
 from typing import Callable
+from flask import Flask
 
 # The object retrived by flask
 template_extensions = {}
@@ -41,10 +42,7 @@ def get_required_css() -> list:
     
     # Ensures that the function always returns a list
     return []
-    
-if __name__ == "__main__":
-    ls = get_required_js()
-    
-    css = get_required_css()
-    
-    f = 5
+
+def init_app(app: Flask):
+    """Initalizes the Flask Object template settings"""
+    app.jinja_env.globals.update(template_extensions)
