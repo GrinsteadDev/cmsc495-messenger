@@ -76,6 +76,8 @@
   align-self: stretch;
   width: 100%;
   flex: 0 0 auto;
+  max-height: 170px;
+  overflow-y: auto;
 }
 
 .body-container .state-layer {

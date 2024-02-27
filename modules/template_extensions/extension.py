@@ -97,6 +97,18 @@ def get_user_friends() -> list:
             'name': 'User 2',
             'url': '/rooms/profile/userprofileid'
         },
+        {
+            'name': 'User 3',
+            'url': '/rooms/profile/userprofileid'
+        },
+        {
+            'name': 'User 4',
+            'url': '/rooms/profile/userprofileid'
+        },
+        {
+            'name': 'User 5',
+            'url': '/rooms/profile/userprofileid'
+        },
     ]
 
 def init_app(app: Flask):
