@@ -14,6 +14,7 @@ Objects:
     class UpperMatchList(list)
         Extends the list object to make it uppercase only
 """
+from fnmatch import fnmatch
 
 class UpperMatchList(list):
     """

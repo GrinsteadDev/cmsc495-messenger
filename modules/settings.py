@@ -30,7 +30,6 @@ Objects:
 """
 from os import environ
 from datetime import timedelta
-from fnmatch import fnmatch
 # Initializes the Modules that need initialization
 from flask import Flask, current_app
 from modules.db.db import init_app as init_app_db
