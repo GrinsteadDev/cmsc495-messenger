@@ -104,6 +104,7 @@ button, input[type="button"] {
 .body-container .label-text {
   position: relative;
   width: fit-content;
+  width: -moz-fit-content;
   margin-top: -1px;
   font-family: var(--m3-label-large-font-family);
   font-weight: var(--m3-label-large-font-weight);

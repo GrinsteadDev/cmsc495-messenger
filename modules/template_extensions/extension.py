@@ -2,7 +2,7 @@ from os import listdir
 from os.path import isfile, join, exists, abspath, dirname
 from typing import Callable
 from flask import Flask
-from template import template_blueprint
+from modules.session_handler import mysession
 
 # The object retrived by flask
 template_extensions = {}
@@ -44,7 +44,64 @@ def get_required_css() -> list:
     # Ensures that the function always returns a list
     return []
 
+@template_extension
+def get_current_user() -> str:
+    """Fetches the current user session"""
+    return mysession.get('user')
+
+@template_extension
+def get_user_rooms() -> list:
+    """
+    Fetchs the user's aviable chat rooms
+    
+    returns
+        list
+            __item__ -> dict
+                name: <room name>
+                url: <room url>
+    """
+    # TODO add room query functionality
+
+    # Sample
+    return [
+        {
+            'name': 'my room 1',
+            'url': '/rooms/roomidhere1'
+        },
+        {
+            'name': 'Red Room',
+            'url': '/rooms/roomidhere2'
+        },
+    ]
+
+@template_extension
+def get_user_friends() -> list:
+    """
+    Fetchs the user's friend list
+    
+    returns
+        list
+            __item__ -> dict
+                name: <user display name>
+                url: <user profile url>
+    """
+    # TODO add room query functionality
+
+    # Sample
+    return [
+        {
+            'name': 'User 1',
+            'url': '/users/profile/userprofileid'
+        },
+        {
+            'name': 'User 2',
+            'url': '/rooms/profile/userprofileid'
+        },
+    ]
+
 def init_app(app: Flask):
     """Initalizes the Flask Object template settings"""
+    from template import template_blueprint
+
     app.jinja_env.globals.update(template_extensions)
     app.register_blueprint(template_blueprint)

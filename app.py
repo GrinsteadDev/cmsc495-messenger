@@ -46,4 +46,4 @@ if __name__ == "__main__":
     """
     Only called when run during local execution or app debug
     """
-    app.run()
+    app.run(debug=True)
