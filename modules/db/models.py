@@ -10,7 +10,7 @@ Contributors:
 Methods:
    Public methods, privet methods don't need to be included here
 """
-import datetime
+from datetime import datetime
 from db.db import db
 from sqlalchemy.sql import func
 

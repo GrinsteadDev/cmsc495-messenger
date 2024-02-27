@@ -15,6 +15,10 @@ Objects:
 from datetime import datetime
 from flask import Blueprint, request, jsonify
 
+# Modules
+from modules.db import database
+from modules.session_handler import mysession
+
 api_blueprint = Blueprint('api', __name__)
 
 @api_blueprint.route("/api/")
@@ -34,7 +38,7 @@ def register_user():
     # Verfiys that the passwords match
     # TODO Add password complexity checks
     if password_confim == password:
-        register_user_rp = db_register_user(first_name, last_name, username, email, password)
+        register_user_rp = database.register_user(first_name, last_name, username, email, password)
         if register_user_rp is None:
             response = {
                 'message': 'User registered successfully',
@@ -67,9 +71,9 @@ def user_login():
     mysession.clear()
 
     # Check credentials on database
-    if db_verify_user(username, password):
+    if database.verify_user(username, password):
         # Updates user login
-        user = db_get_user(username)
+        user = database.get_user(username)
         user.last_login = datetime.now()
         # Sets Session information
         mysession.set('USER', username)
