@@ -14,7 +14,7 @@ def set_file_blacklist(blacklist: UpperMatchList):
 @template_blueprint.route("/<string:name>.<string:ext>")
 def fetch_templates(name, ext):
     # Fetches a template as a webpage url or returns 404
-    if ext in ["", "html", "htm"] and not file_blacklist.pattern_match(name=f"{name}.*"):
+    if ext in ["", "html", "htm"] and not file_blacklist.pattern_match(f"{name}.*"):
         try:
             return render_template(f"{name}.html", request_name=name, request_url=request.base_url)
         except TemplateNotFound as e:

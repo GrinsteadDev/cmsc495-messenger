@@ -14,10 +14,10 @@ Objects:
     app - the Flask object.
 """
 import os
-from flask import Flask, current_app
+from flask import Flask
 from git import Repo
 # Custom Modules located at ./modules/*
-from modules.settings import init_app_settings, file_blacklist
+from modules.settings import init_app_settings
 
 app = Flask(__name__)
 
