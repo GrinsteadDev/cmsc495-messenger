@@ -23,7 +23,9 @@
     <meta name="twitter:title" content="{{ title_s }}" />
     <meta name="twitter:description" content="{{ description_s }}" />
     <meta name="twitter:image" content="" />
-    <!-- Title -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notification/style.css') }}" />
+    <script src="{{ url_for('static', filename='js/notification.js')}}" defer></script>
+    <!-- Template Info -->
     <title>{{ title_s }}</title>
     {% block metadata %}{% endblock %}
     {% for x in get_required_js() %}
@@ -36,5 +38,6 @@
 </head>
 <body>
     {% block html_body %}{% endblock %}
+    {% include 'notification.html' %}
 </body>
 </html>
