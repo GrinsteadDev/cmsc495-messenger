@@ -1,127 +1,67 @@
-{% extends 'base.html' %}
+{% extends 'header-menu.html' %}
 {% block title %}Lobby{% endblock %}
 {% block html_head %}
+{{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/lobby/style.css') }}" />
 {% endblock %}
-{% block html_body %}
-<div class="body-container">
-    <div class="header">
-        <div class="overlap-2">
-            <div class="text-wrapper-2">Current User : {{ get_current_user() }}</div>
-        </div>
-        <div class="user-images-user">
-            <!-- TODO add user icon -->
-            <!-- <img class="user-icon" src="{{ url_for('static', filename='img/lobby/check.svg') }}" /> -->
-        </div>
-    </div>
-    <div class="menu">
-        <div class="menu-dark">
-            <div class="menu-title">Menu</div>
-            <div class="div-2">
-                <div class="div-3"></div>
-                <div class="div-3">
-                    <div class="state-layer">
-                        <div class="div-2"><div class="label-text"></div></div>
-                    </div>
-                </div>
-                <div class="div-3">
-                    <div class="state-layer">
-                        <div class="div-2"><div class="label-text"></div></div>
-                    </div>
-                </div>
-                <div class="div-3">
-                    <div class="state-layer">
-                        <div class="div-2"><div class="label-text"></div></div>
-                    </div>
-                </div>
-                <div class="div-3">
-                    <div class="state-layer">
-                        <div class="div-2"><div class="label-text"></div></div>
-                    </div>
-                </div>
-                <div class="div-3">
-                    <div class="state-layer">
-                        <div class="div-2"><div class="label-text">Create a New Room</div></div>
-                    </div>
-                </div>
-                <div class="div-3">
-                    <div class="state-layer">
-                        <div class="div-2"><div class="label-text">Join a Room</div></div>
-                    </div>
-                </div>
-                <div class="div-3">
-                    <div class="state-layer">
-                        <div class="div-2"><div class="label-text"></div></div>
-                    </div>
-                </div>
-                <div class="div-3">
-                    <div class="state-layer">
-                        <div class="div-2"><div class="label-text"></div></div>
-                    </div>
-                </div>
-                <div class="div-3"></div>
-                <div class="div-3">
-                    <div class="state-layer">
-                        <div class="div-2"><div class="label-text">Logout</div></div>
-                    </div>
-                </div>
-                <div class="div-3">
-                    <div class="state-layer">
-                        <div class="div-2"><div class="label-text">Settings</div></div>
-                    </div>
-                </div>
-            </div>
+{% block header_content %}{% endblock %}
+{% block menu_item1 %}{% endblock %}
+{% block menu_item2 %}{% endblock %}
+{% block menu_item3 %}{% endblock %}
+{% block menu_item4 %}{% endblock %}
+{% block menu_item5 %}<div class="div-2"><div class="label-text">Create a New Room</div></div>{% endblock %}
+{% block menu_item6 %}<div class="div-2"><div class="label-text">Join a Room</div></div>{% endblock %}
+{% block menu_item7 %}{% endblock %}
+{% block menu_item8 %}{% endblock %}
+{% block menu_item9 %}<div class="div-2"><div class="label-text">Logout</div></div>{% endblock %}
+{% block menu_item10 %}<div class="div-2"><div class="label-text">Settings</div></div>{% endblock %}
+{% block body_content %}
+<div class="list-dialog">
+    <div class="content">
+        <div class="text-content">
+            <div class="headline">Existing Rooms</div>
+            <p class="supporting-text">A list of rooms that other users have created</p>
         </div>
     </div>
-    <div class="content-container">
-        <div class="list-dialog">
-            <div class="content">
-                <div class="text-content">
-                    <div class="headline">Existing Rooms</div>
-                    <p class="supporting-text">A list of rooms that other users have created</p>
+    <div class="div-3">
+        {# Creates a list item based on available Rooms #}
+        {% for x in get_user_rooms() %}
+        <div class="list-item">
+            <div class="state-layer-overlay"></div>
+            <div class="state-layer-2">
+                <div class="leading-element">
+                    <div class="building-blocks"><div class="initial">A</div></div>
                 </div>
+                <div class="content-2"><div class="headline-2">{{ x.name }}</div></div>
+                <div class="trailing-element"></div>
             </div>
-            <div class="div-3">
-                {# Creates a list item based on available Rooms #}
-                {% for x in get_user_rooms() %}
-                <div class="list-item">
-                    <div class="state-layer-overlay"></div>
-                    <div class="state-layer-2">
-                        <div class="leading-element">
-                            <div class="building-blocks"><div class="initial">A</div></div>
-                        </div>
-                        <div class="content-2"><div class="headline-2">{{ x.name }}</div></div>
-                        <div class="trailing-element"></div>
-                    </div>
-                    <div class="horizontal-dark"><img class="divider" src="{{ url_for('static', filename='img/lobby/divider-18.svg') }}" /></div>
-                </div>
-                {% endfor %}
-            </div>
+            <div class="horizontal-dark"><img class="divider" src="{{ url_for('static', filename='img/lobby/divider-18.svg') }}" /></div>
         </div>
-        <div class="list-dialog">
-            <div class="content">
-                <div class="text-content">
-                    <div class="headline">Online Users</div>
-                    <p class="supporting-text">Users who are currently Online</p>
-                </div>
-            </div>
-            <div class="div-3">
-                {# Creates a list item based on available Rooms #}
-                {% for x in get_user_friends() %}
-                <div class="list-item">
-                    <div class="state-layer-overlay"></div>
-                    <div class="state-layer-2">
-                        <div class="leading-element">
-                            <div class="building-blocks"><div class="initial">A</div></div>
-                        </div>
-                        <div class="content-2"><div class="headline-2">{{ x.name }}</div></div>
-                        <div class="trailing-element"></div>
-                    </div>
-                    <div class="horizontal-dark"><img class="divider" src="{{ url_for('static', filename='img/lobby/divider-18.svg') }}" /></div>
-                </div>
-                {% endfor %}
-            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="list-dialog">
+    <div class="content">
+        <div class="text-content">
+            <div class="headline">Online Users</div>
+            <p class="supporting-text">Users who are currently Online</p>
         </div>
+    </div>
+    <div class="div-3">
+        {# Creates a list item based on available Rooms #}
+        {% for x in get_user_friends() %}
+        <div class="list-item">
+            <div class="state-layer-overlay"></div>
+            <div class="state-layer-2">
+                <div class="leading-element">
+                    <div class="building-blocks"><div class="initial">A</div></div>
+                </div>
+                <div class="content-2"><div class="headline-2">{{ x.name }}</div></div>
+                <div class="trailing-element"></div>
+            </div>
+            <div class="horizontal-dark"><img class="divider" src="{{ url_for('static', filename='img/lobby/divider-18.svg') }}" /></div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

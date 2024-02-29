@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block html_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/header-menu.css') }}" />
+{% endblock %}
+{% block html_body %}
+<div class="body-container">
+    <div class="header">
+        <div class="col-2">
+            {% block header_content %}{% endblock %}
+            <div class="header-text-wrapper">Current User : {{ get_current_user() }}</div>
+        </div>
+        <div class="col-3 header-user-images-user">
+            <!-- TODO add user icon -->
+            <!-- <img class="user-icon" src="{{ url_for('static', filename='img/lobby/check.svg') }}" /> -->
+        </div>
+    </div>
+    <div class="menu">
+        <div class="menu-dark">
+            <div class="menu-title">Menu</div>
+            <div class="menu-content">
+                <div class="menu-item">
+                </div>
+                <div class="menu-item">
+                    <div>
+                        {% block menu_item1 %}{% endblock %}
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        {% block menu_item2 %}{% endblock %}
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        {% block menu_item3 %}{% endblock %}
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        {% block menu_item4 %}{% endblock %}
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        {% block menu_item5 %}{% endblock %}
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        {% block menu_item6 %}{% endblock %}
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        {% block menu_item7 %}{% endblock %}
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        {% block menu_item8 %}{% endblock %}
+                    </div>
+                </div>
+                <div class="menu-item">
+                </div>
+                <div class="menu-item">
+                    <div>
+                        {% block menu_item9 %}{% endblock %}
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        {% block menu_item10 %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-container">
+        {% block body_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

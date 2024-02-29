@@ -18,164 +18,12 @@
 *   /css/Settings_theme/style.css
 *   /css/Settings_UO/style.css
 */
-
-.body-container {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
-  background: unset;
-  background-color: #000000;
-}
-
-.body-container .menu {
-  grid-row: 1 / span 2;
-  grid-column: 1;
-  width: fit-content;
-  width: -moz-fit-content;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  border-radius: 4px;
-}
-
-.body-container .header {
-  grid-row: 1;
-  grid-column: 1 / span 2;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  background-color: #211f26;
-}
-
-.body-container .content-container {
-  grid-row: 2;
-  grid-column: 2;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: nowrap;
-  align-items: center;
-  background-image: url(/static/img/background.svg);
-  background-clip: padding-box;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-color: black;
-}
-
-.body-container .overlap-group-wrapper {
-  background-color: #000000;
-  width: 1512px;
-  height: 982px;
-}
-
-.body-container .overlap-group {
+.body-container .chatbody {
   position: relative;
-  height: 979px;
-  background-image: url(/static/img/room/rectangle-1.svg);
-  background-size: 100% 100%;
-}
-
-.body-container .container {
-  display: flex;
-  width: 31px;
-  height: 28px;
-  position: absolute;
-  top: 9px;
-  left: 11px;
-  background-color: var(--m-3sysdarkprimary);
-  overflow: hidden;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border-radius: 100px;
-}
-
-.body-container .state-layer {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  position: relative;
-  flex: 0 0 auto;
-  margin-top: -6px;
-  margin-bottom: -6px;
-  margin-left: -4.5px;
-}
-
-.body-container .unselected-icon {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  margin-bottom: -488px;
-  margin-right: -749.5px;
-}
-
-.body-container .selected-icon {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  margin-left: -24px;
-}
-
-.body-container .overlap {
-  position: absolute;
-  width: 206px;
-  height: 25px;
-  top: 9px;
-  left: 1261px;
-}
-
-.body-container .text-wrapper {
-  position: absolute;
-  width: 108px;
-  height: 20px;
-  top: 2px;
-  left: 0;
-  font-family: "Roboto", Helvetica;
-  font-weight: 700;
-  color: #ffffff;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-  line-height: 24px;
-  white-space: nowrap;
-}
-
-.body-container .div {
-  position: absolute;
-  width: 100px;
-  height: 25px;
-  top: 0;
-  left: 106px;
-  font-family: "Roboto", Helvetica;
-  font-weight: 700;
-  color: #ffffff;
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: 0.5px;
-  line-height: 24px;
-  white-space: nowrap;
-}
-
-.body-container .user-images-user {
-  position: absolute;
-  width: 30px;
-  height: 33px;
-  top: 8px;
-  left: 1474px;
-  background-image: url(/static/img/room/background.svg);
-  background-size: 100% 100%;
-}
-
-.body-container .check {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 5px;
-  left: 3px;
+  height: 95%;
+  width: 95%;
+  background-color: #443D4F;
+  border-radius: 25px;
 }
 
 .body-container .search-bar-dark {
@@ -185,12 +33,9 @@
   height: 39px;
   align-items: center;
   gap: 4px;
-  position: absolute;
-  top: 5px;
-  left: 504px;
+  position: relative;
   background-color: var(--m3sysdarksurface-container-high);
   border-radius: 28px;
-  overflow: hidden;
 }
 
 .body-container .state-layer-2 {
@@ -287,16 +132,6 @@
   gap: 10px;
   align-items: center;
   position: relative;
-}
-
-.body-container .overlap-2 {
-  position: absolute;
-  width: 1100px;
-  height: 642px;
-  top: 161px;
-  left: 352px;
-  background-image: url(/static/img/room/rectangle-2.svg);
-  background-size: 100% 100%;
 }
 
 .body-container .overlap-3 {
