@@ -30,7 +30,7 @@ def verify_user(username, password):
     """Verify user credentials against stored data"""
     user = get_user(username)
     if user:
-      hashed_password = user.password
+      hashed_password = user.password.encode('utf-8')
       provided_password = password.encode('utf-8')
       if bcrypt.checkpw(provided_password, hashed_password):
             return True

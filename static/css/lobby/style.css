@@ -24,6 +24,7 @@
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   background: unset;
+  background-color: #000000;
 }
 
 .body-container .content-container {
