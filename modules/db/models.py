@@ -62,11 +62,13 @@ class UserFile(db.Model):
     """Represents a file uploaded by user"""
     __tablename__ = 'user_files'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    file_name = db.Column(db.String(50), nullable=False)
-    path = db.Column(db.String(255), nullable=False)
+    file_name = db.Column(db.String(255), nullable=False)
+    file_data = db.Column(db.LargeBinary, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
+    message_id = db.Column(db.Integer, db.ForeignKey('messages.id'), nullable=True)
 
     user = db.relationship('UserAccount', backref=db.backref('files', lazy=True))
+    message = db.relationship('Message', backref=db.backref('attachments', lazy='dynamic'))
 
 class UserRole(db.Model):
     """Represents a role that can be assigned to a user"""
