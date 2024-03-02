@@ -11,7 +11,7 @@ Contributors:
 
 const axios = window.axios;
 
-async function registerUser(firstName, lastName, userName, userEmail, userPassword, userPassword2){
+export async function registerUser(firstName, lastName, userName, userEmail, userPassword, userPassword2){
   try {
     const response = await axios.post(
       '/api/register',
@@ -30,9 +30,10 @@ async function registerUser(firstName, lastName, userName, userEmail, userPasswo
       }
     );
     console.log(response.data);
+    window.location.href = '/login';
   } catch (error) {
     console.error(error);
-    window.alert(error);
+    showNotification('Error', error.toString(), 5000);
   }
 }
 
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 });
 
-async function login(userName, password, status = 'active') {
+export async function login(userName, password, status = 'active') {
   try {
     const response = await axios.post(
       '/api/login',
@@ -69,9 +70,10 @@ async function login(userName, password, status = 'active') {
       }
     );
     console.log(response.data);
+    window.location.href = '/home';
   } catch (error) {
     console.error(error);
-    window.alert(error);
+    showNotification('Error', error.toString(), 5000);
   }
 }
 
@@ -88,7 +90,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 });
 
-async function logout(logoutMessage = '') {
+export async function logout(logoutMessage = '') {
   try {
     const token = 'ACCESS_TOKEN'; //TODO: Put real value here
     const response = await axios.post('/api/logout', {
@@ -99,10 +101,11 @@ async function logout(logoutMessage = '') {
       }
     });
     console.log(response.data);
-    window.alert("Succesfully logged out.");
+    window.location.href = '/login';
+    showNotification('Logged out.', "Successfully logged out.", 5000);
   } catch (error) {
     console.error(error);
-    window.alert(error);
+    showNotification('Error', error.toString(), 5000);
   }
 }
 
@@ -116,7 +119,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 });
 
-async function passwordRecovery(userEmail) {
+export async function passwordRecovery(userEmail) {
   try {
     const response = await axios.post('/api/password-recovery', {
       email: userEmail
