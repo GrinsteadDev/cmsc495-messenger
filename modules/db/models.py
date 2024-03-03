@@ -34,6 +34,7 @@ class UserAccount(db.Model):
     password = db.Column(db.String(255), unique=True, nullable=False)
     registered_date = db.Column(db.DateTime(timezone=True), default=func.now())
     last_login = db.Column(db.DateTime(timezone=True))
+    email_verified = db.Column(db.Boolean, default=False, nullable=False)
 
 class Chatroom(db.Model):
     """Represents a chatroom where users can send messages"""
@@ -123,3 +124,25 @@ class ChatRoomAccess(db.Model):
     user_role = db.relationship('UserRole', backref=db.backref('chatroom_access_list', lazy=True))
     user_permission = db.relationship('UserPermission', backref=db.backref('chatroom_access_list', lazy=True))
     user = db.relationship('UserAccount', backref=db.backref('chatroom_access_list', lazy=True))
+
+class UserVerificationToken(db.Model):
+    """Stores tokens for email verification linked to user accounts"""
+    __tablename__ = 'user_verification_token'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    token = db.Column(db.String(255), nullable=False, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow())
+
+    user = db.relationship('UserAccount', backref=db.backref('verification_tokens', lazy=True))
+
+class PasswordRecovery(db.Model):
+    """Holds password recovery tokens for users to reset their passwords"""
+    __tablename__ = 'password_recovery'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    token = db.Column(db.String(255), nullable=False, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utc.now())
+
+    user = db.relationship('UserAccount', backref=db.backref('recovery_tokens', lazy=True))
