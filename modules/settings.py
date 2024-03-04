@@ -113,7 +113,13 @@ def init_app_settings(app: Flask = None, debug: bool = False)-> Flask:
             app.config.from_object(ReleaseConfig())
 
         set_file_blacklist(file_blacklist)
-        init_app_db(app)
+
+        # Sets sql alchemy to drop the existing tables when ran in debug mode
+        if debug:
+            init_app_db(app, True)
+        else:
+            init_app_db(app)
+        
         init_app_sess(app)
         init_app_template(app)
         app.register_blueprint(app_blueprint)
