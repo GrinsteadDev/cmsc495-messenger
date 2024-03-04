@@ -105,7 +105,7 @@ def init_app_settings(app: Flask = None, debug: bool = False)-> Flask:
     
     with app.app_context():
         if not debug:
-            debug = bool(environ.get('DEBUG', False))
+            debug = bool(environ.get('DEBUG', 'False').upper() in ['TRUE', '1' 'T'])
 
         if debug:
             app.config.from_object(DebugConfig())
