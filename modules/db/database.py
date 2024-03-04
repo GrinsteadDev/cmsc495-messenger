@@ -14,7 +14,8 @@ Methods:
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from flask import current_app
 import bcrypt
-from models import Message, UserAccount, UserFile, UserPermission, UserPermissionToRole, UserRoleAssignment, db
+from models import Message, PasswordRecovery, UserAccount, UserFile, UserPermission, UserPermissionToRole, UserRoleAssignment, UserVerificationToken, db
+import secrets
 
 def get_user(username):
     """Retrieve a user from the database by username"""
@@ -133,3 +134,45 @@ def get_message(message_id):
         }
     else:
         return {'message': 'Message Not Found.'}
+    
+def generate_verification_token(user_id):
+    """Generates and stores a unique verification token for a user"""
+    token = secrets.token_urlsafe()
+    new_token = UserVerificationToken(token=token, user_id=user_id)
+    db.session.add(new_token)
+    db.session.commit()
+    return token
+
+def verify_user_email(token):
+    """Verifies user email based on the provided token"""
+    token_record = UserVerificationToken.query.filter_by(token=token).first()
+    if token_record:
+        user = token_record.user
+        user.email_verified = True
+        db.session.delete(token_record)
+        db.session.commit()
+        return True
+    return False
+
+def initiate_password_recovery(email):
+    """Initiates password recovery by generating a token"""
+    user = UserAccount.query.filter_by(email=email).first()
+    if user:
+        token = secrets.token_urlsafe()
+        recovery_record = PasswordRecovery(token=token, user_id=user.id)
+        db.session.add(recovery_record)
+        db.session.commit()
+        return token
+    return None
+
+def reset_password_with_token(token, new_password):
+    """Resets user password using valid password recovery token"""
+    recovery_record = PasswordRecovery.query.filter_by(token=token).first()
+    if recovery_record:
+        user = recovery_record.user
+        hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
+        user.password = hashed_password.decode('utf-8')
+        db.session.delete(recovery_record)
+        db.session.commit()
+        return True
+    return False
