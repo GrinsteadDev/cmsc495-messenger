@@ -39,6 +39,7 @@ def test_register_user(client):
         'username': 'johndoe',
         'email': 'johndoe@example.com',
         'password': 'password',
+        'password-confirm': 'password',
         'status': 'active'
     }
     response = client.post('/api/register', data=data)
