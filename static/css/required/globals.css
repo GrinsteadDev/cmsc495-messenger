@@ -1,19 +1,41 @@
+
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 @import url("https://fonts.googleapis.com/css?family=Roboto:500,700,400");
+
+/* Define base color variables */
+:root {
+  --background-color: #ffffff; /* White background for light mode */
+  --text-color: #333333; /* Dark grey text for light mode for better readability */
+  --link-color: #1a0dab; /* A standard blue color for links */
+  --button-outline-color: #4a90e2; /* Blue color for button focus outline */
+  --border-color: #e1e1e1; /* Light grey border color for elements */
+}
+
 * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
+
 html,
 body {
   margin: 0px;
   height: 100%;
+  background-color: var(--background-color); /* Apply the background color variable */
+  color: var(--text-color); /* Apply the text color variable */
 }
+
 /* a blue color as a generic focus style */
 button:focus-visible {
   outline: -webkit-focus-ring-color auto 5px !important;
-  outline: 2px solid #4a90e2 !important;
+  outline: 2px solid var(--button-outline-color) !important; /* Use variable for focus outline */
 }
+
 a {
   text-decoration: none;
+  color: var(--link-color); /* Use variable for link color */
+}
+
+/* Style for borders if needed */
+.border {
+  border-color: var(--border-color); /* Use variable for border color */
 }
