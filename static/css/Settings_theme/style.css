@@ -18,6 +18,33 @@
 *   /css/Settings_theme/style.css
 *   /css/Settings_UO/style.css
 */
+
+:root {
+  /* Light mode colors */
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-container-color: #f0f0f0;
+  --on-primary-container-color: #333333;
+  --divider-color: #cccccc;
+  
+  /* Dark mode colors */
+  --dark-background-color: #121212;
+  --dark-text-color: #ffffff;
+  --dark-primary-container-color: #333333;
+  --dark-on-primary-container-color: #eeeeee;
+  --dark-divider-color: #444444;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: var(--dark-background-color);
+    --text-color: var(--dark-text-color);
+    --primary-container-color: var(--dark-primary-container-color);
+    --on-primary-container-color: var(--dark-on-primary-container-color);
+    --divider-color: var(--dark-divider-color);
+  }
+}
+
 .macbook-pro {
   background-color: #000000;
   display: flex;

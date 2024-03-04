@@ -59,6 +59,30 @@
         </div>
       </div>
       <div class="headline">Theme</div>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const themeToggleButton = document.getElementById('theme-toggle');
+          const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+        
+          if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            if (currentTheme === 'dark') {
+              themeToggleButton.checked = true;
+            }
+          }
+        
+          themeToggleButton.addEventListener('change', function() {
+            if (this.checked) {
+              document.documentElement.setAttribute('data-theme', 'dark');
+              localStorage.setItem('theme', 'dark');
+            } else {
+              document.documentElement.setAttribute('data-theme', 'light');
+              localStorage.setItem('theme', 'light');
+            }
+          });
+        });
+        </script>
     </div>
     <div class="rectangle">
       <div class="label-text-wrapper"><div class="label-text-4">Label</div></div>
