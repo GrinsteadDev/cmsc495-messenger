@@ -18,13 +18,11 @@ from models import Message, UserAccount, UserFile, UserPermission, UserPermissio
 
 def get_user(username):
     """Retrieve a user from the database by username"""
-    print(current_app.config)
 
     with current_app.app_context():
         user = UserAccount.query.filter_by(username=username).first()
     
     return user if user else None
-
 
 def verify_user(username, password):
     """Verify user credentials against stored data"""
