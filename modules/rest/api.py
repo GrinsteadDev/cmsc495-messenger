@@ -158,32 +158,35 @@ def reset_password():
         }
     return jsonify(response)
 
-
 @api_blueprint.route('/api/chat-rooms', methods=['GET'])
 def get_chat_rooms():
+    chat_rooms = database.get_chat_rooms()
 
-    chat_rooms = [
-        {'id': 1, 'name': 'Room 1'},
-        {'id': 2, 'name': 'Room 2'},
-        {'id': 3, 'name': 'Room 3'}
-    ]
+    # Return the list of chat rooms 
     return jsonify(chat_rooms)
 
-@api_blueprint.route('/api/join-room', methods=['GET'])
+@api_blueprint.route('/api/join-room', methods=['POST'])
 def join_room():
+    # Get the room_id and user_id 
+    room_id = request.json.get('room_id')
+    user_id = request.json.get('user_id')
 
-    room_id = request.args.get('room_id')
-    user_id = request.args.get('user_id')
+    success = database.join_room(user_id, room_id)
 
-    response = {
-        'message': f'User {user_id} joined room {room_id}'
-    }
+    # Check if joining was successful and return response
+    if success:
+        response = {
+            'message': f'User {user_id} joined room {room_id} successfully'
+        }
+    else:
+        response = {
+            'error': f'Failed to join room {room_id}.'
+        }
 
-    return jsonify(response)    
+    return jsonify(response)   
 
 @api_blueprint.route('/api/online-users', methods=['GET'])
 def get_online_users():
-
     online_users = database.get_online_users()
 
     # Assuming get_online_users returns a list of online user information
@@ -233,7 +236,6 @@ def create_room():
     room_name = data.get('room_name')
     creator_id = data.get('creator_id')
 
-    # Call the database function to create the room
     room_id = database.create_room(room_name, creator_id)
 
     response = {
@@ -271,7 +273,7 @@ def update_setting(setting_id):
     data = request.json
     new_value = data.get('value')
 
-    # Call the database function to update the setting
+    # Database function to update the setting
     success = database.update_setting(setting_id, new_value)
 
     if success:
@@ -292,7 +294,6 @@ def update_settings():
     setting_id = request.form.get('setting_id')
     new_value = request.form.get('new_value')
 
-    # Call the database function to update the setting
     success = database.update_setting(setting_id, new_value)
 
     if success:
@@ -308,3 +309,29 @@ def update_settings():
 
     return jsonify(response)
 
+@api_blueprint.route('/api/upload-file', methods=['POST'])
+def upload_file():
+    user_id = request.form.get('user_id')
+    file_name = request.form.get('file_name')
+    file_data = request.files.get('file_data')
+
+    # Upload the file
+    result = database.upload_file_todb(user_id, file_name, file_data)
+
+    return jsonify(result)
+
+@api_blueprint.route('/api/get-file/<file_id>', methods=['GET'])
+def get_file(file_id):
+    # Retrieve the file
+    result = database.get_file_from_db(file_id)
+
+    return jsonify(result)
+
+@api_blueprint.route('/api/search-files', methods=['GET'])
+def search_files():
+    user_id = request.args.get('user_id')
+    file_name = request.args.get('file_name')
+
+    result = database.search_files_by_name(user_id, file_name)
+
+    return jsonify(result)
