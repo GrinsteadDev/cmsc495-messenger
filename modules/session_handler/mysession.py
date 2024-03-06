@@ -20,6 +20,7 @@ def init_sess(app: Flask):
     """
     Initializes the session
     """
+    global sess
     sess.init_app(app)
 
 def sid() -> str:
@@ -32,26 +33,22 @@ def get(key: str):
     """
     Get a session value
     """
-    if not sess.app is None:
-        return session.get(key)
+    return session.get(key)
 
 def set(key: str, value):
     """
     Sets a session value
     """
-    if not sess.app is None:
-        session[key] = value
+    session[key] = value
 
 def pop(key: str):
     """
     Removes a session value
     """
-    if not sess.app is None:
-        session.pop(key)
+    session.pop(key)
 
 def clear():
     """
     Clears the session
     """
-    if not sess.app is None:
-        session.clear()
+    session.clear()

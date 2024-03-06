@@ -10,7 +10,7 @@ Contributors:
 Methods:
    Public methods, privet methods don't need to be included here
 """
-
+# correct reference to utcnow is datetime.datetime.utcnow()
 import datetime
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from flask import current_app
@@ -195,7 +195,7 @@ def create_room(name, owner_id):
 
 def delete_room(room_id, user_id):
     """Deletes Chatrooom"""
-    room = Chatroom.query.get(room>id)
+    room = Chatroom.query.get(room_id)
     if room and room.owner_id == user_id:
         db.session.delete(room)
         db.session.commit()
@@ -239,7 +239,7 @@ def update_user_last_login(user_id):
     """Updates last_login field f/user"""
     user = UserAccount.query.get(user_id)
     if user:
-        user.last_login = datetime.utcnow()
+        user.last_login = datetime.datetime.utcnow()
         try:
           db.session.commit()
         except Exception as e:
@@ -248,6 +248,6 @@ def update_user_last_login(user_id):
 
 def get_online_users():
     """Tracks online users if they've been active within 15 minutes"""
-    threshold = datetime.now() - datetime.timedelta(minutes=15)
+    threshold = datetime.datetime.now() - datetime.timedelta(minutes=15)
     online_users = UserAccount.query.filter(UserAccount.last_login >= threshold).all()
     return online_users

@@ -7,6 +7,7 @@ Contributors:
    Catherine Casey
    Devin Grinstead - Ammened on 2-20-2024
    Derrick Sanchez - Added line in user_login() 3-5-2024
+   Devin Grinstead - Ammended on 3-6-24 
 Methods:
    
 Objects:
@@ -21,11 +22,6 @@ from modules.db import database
 from modules.session_handler import mysession
 
 api_blueprint = Blueprint('api', __name__)
-
-@api_blueprint.route("/api/")
-def sample():
-    """
-    """
 
 @api_blueprint.route("/api/register", methods=['POST'])
 def register_user():
@@ -95,19 +91,6 @@ def user_login():
 
 @api_blueprint.route('/api/logout', methods=['POST'])
 def user_logout():
-    # User Authorization handled by session handler 'mysession'
-    # Authorization headers are used by .htaccess and apache. Making
-    # them rarely accessed from the code directly.
-    """
-    authorization_header = request.headers.get('Authorization')
-    if not authorization_header or not authorization_header.startswith('Bearer '):
-        return jsonify({'error': 'Unauthorized'}), 401  
-
-    access_token = authorization_header.split(' ')[1]
-
-    logout_message = request.form.get('message')
-    """
-
     # Logout logic
     # By clearing the session the user is affectively logged out
     mysession.clear()
@@ -281,7 +264,8 @@ def update_setting(setting_id):
     new_value = data.get('value')
 
     # Database function to update the setting
-    success = database.update_setting(setting_id, new_value)
+    # The database function is update_settings not update_setting
+    success = database.update_settings(setting_id, new_value)
 
     if success:
         response = {
@@ -300,8 +284,8 @@ def update_setting(setting_id):
 def update_settings():
     setting_id = request.form.get('setting_id')
     new_value = request.form.get('new_value')
-
-    success = database.update_setting(setting_id, new_value)
+    # The database function is update_settings not update_setting
+    success = database.update_settings(setting_id, new_value)
 
     if success:
         response = {

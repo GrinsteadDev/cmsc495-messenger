@@ -41,9 +41,8 @@ from modules.common_objs import UpperMatchList
 
 class BaseConfig(object):
     """Base config, stages the database"""
-    PERMANENT_SESSION_LIFETIME = timedelta(minutes=15)
-    SESSION_TYPE = 'SqlAlchemySessionInterface'
-    
+    SESSION_TYPE = 'filesystem'
+
     @property
     def PERMANENT_SESSION_LIFETIME(self):
         """Fetches the session lifetime in minutes from the .env or returns 15"""
@@ -91,7 +90,9 @@ class DebugConfig(BaseConfig):
 
 file_blacklist = UpperMatchList([
     "base.html",
-    "head.html"
+    "head.html",
+    "header-menu.html",
+    "Settings_page_UO.html",
 ])
 
 def init_app_settings(app: Flask = None, debug: bool = False)-> Flask:

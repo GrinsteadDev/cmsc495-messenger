@@ -11,7 +11,7 @@ Contributors:
 
 const axios = window.axios;
 
-export async function updateSetting(settingId, settingValue) {
+async function updateSetting(settingId, settingValue) {
     try {
       const response = await axios.post(`/api/settings/${settingId}`, { 
         settingValue 

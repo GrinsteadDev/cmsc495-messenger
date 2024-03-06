@@ -6,7 +6,8 @@ function fetchMessages() {
         })
         .catch(error => console.error('Error fetching messages:', error));
 }
-setInterval(fetchMessages, 1000);
+
+// setInterval(fetchMessages, 1000);
 self.addEventListener('message', (event) => {
     console.log('Message:',event.data);
 });

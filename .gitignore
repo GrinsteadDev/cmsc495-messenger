@@ -400,3 +400,7 @@ env
 
 # Python .env file
 *.env
+
+# The Flask Session
+flask_session
+flask-session/*

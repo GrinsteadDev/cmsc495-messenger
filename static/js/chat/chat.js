@@ -11,7 +11,7 @@ Contributors:
 
 const axios = window.axios;
 
-export async function getChatRooms() {
+async function getChatRooms() {
     try {
       const response = await axios.get('/api/chat-rooms');
       console.log(response.data);
@@ -20,7 +20,7 @@ export async function getChatRooms() {
     }
 }
 
-export async function joinRoom() {
+async function joinRoom() {
     try {
       const response = await axios.get('/api/join-room');
       console.log(response.data);
@@ -29,7 +29,7 @@ export async function joinRoom() {
     }
 }
 
-export async function getOnlineUsers() {
+async function getOnlineUsers() {
     try {
       const response = await axios.get('/api/online-users');
       console.log(response.data);
@@ -38,7 +38,7 @@ export async function getOnlineUsers() {
     }
 }
 
-export async function sendMessage(roomId, userName, message) {
+async function sendMessage(roomId, userName, message) {
     try {
       const response = await axios.post('/api/send-message', {
         roomId,
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 });
 
-export async function peekMessage() {
+async function peekMessage() {
     try {
       const response = await axios.get('/api/peek-message');
       console.log(response.data);
@@ -75,7 +75,7 @@ export async function peekMessage() {
     }
 }
 
-export async function getMessage() {
+async function getMessage() {
     try {
       const response = await axios.get('/api/get-message');
       console.log(response.data);
@@ -84,7 +84,7 @@ export async function getMessage() {
     }
 }
 
-export async function createRoom(roomName, userName) {
+async function createRoom(roomName, userName) {
     try {
       const response = await axios.post('/api/create-room', {
         roomName,
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 });
 
-export async function deleteRoom(roomId) {
+async function deleteRoom(roomId) {
     try {
       const response = await axios.post('/api/delete-room', {
         roomId

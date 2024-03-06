@@ -1,5 +1,5 @@
 {% extends 'header-menu.html' %}
-{% block title %}Room{% endblock %}
+{% block title %}{{ request_name }}{% endblock %}
 {% block html_head %}
 {{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/room/style.css') }}" />

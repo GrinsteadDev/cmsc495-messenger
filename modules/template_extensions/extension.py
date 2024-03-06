@@ -3,6 +3,7 @@ from os.path import isfile, join, exists, abspath, dirname
 from typing import Callable
 from flask import Flask
 from modules.session_handler import mysession
+from modules.db.database import get_chat_rooms, get_online_users
 
 # The object retrived by flask
 template_extensions = {}
@@ -47,7 +48,10 @@ def get_required_css() -> list:
 @template_extension
 def get_current_user() -> str:
     """Fetches the current user session"""
-    return mysession.get('user')
+
+    print(mysession.get('USER'))
+
+    return mysession.get('USER')
 
 @template_extension
 def get_user_rooms() -> list:
@@ -58,21 +62,13 @@ def get_user_rooms() -> list:
         list
             __item__ -> dict
                 name: <room name>
-                url: <room url>
+                id: <room id>
     """
-    # TODO add room query functionality
+    rooms = [{ 'name': x.name, 'id': x.id } for x in get_chat_rooms()]
 
-    # Sample
-    return [
-        {
-            'name': 'my room 1',
-            'url': '/rooms/roomidhere1'
-        },
-        {
-            'name': 'Red Room',
-            'url': '/rooms/roomidhere2'
-        },
-    ]
+    print(rooms)
+
+    return rooms
 
 @template_extension
 def get_user_friends() -> list:
@@ -85,31 +81,9 @@ def get_user_friends() -> list:
                 name: <user display name>
                 url: <user profile url>
     """
-    # TODO add room query functionality
+    users = [{'name': x.username} for x in get_online_users()]
 
-    # Sample
-    return [
-        {
-            'name': 'User 1',
-            'url': '/users/profile/userprofileid'
-        },
-        {
-            'name': 'User 2',
-            'url': '/rooms/profile/userprofileid'
-        },
-        {
-            'name': 'User 3',
-            'url': '/rooms/profile/userprofileid'
-        },
-        {
-            'name': 'User 4',
-            'url': '/rooms/profile/userprofileid'
-        },
-        {
-            'name': 'User 5',
-            'url': '/rooms/profile/userprofileid'
-        },
-    ]
+    return users
 
 def init_app(app: Flask):
     """Initalizes the Flask Object template settings"""
