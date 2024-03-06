@@ -168,4 +168,4 @@ class Settings(db.Model):
     notification_enabled = db.Column(db.Boolean, default=True)
     theme = db.Column(db.String(50), default='light')
 
-    user = db.relationships('UserAccount', backref=db.backref('settings', uselist=False))
+    user = db.relationship('UserAccount', backref=db.backref('settings', uselist=False))

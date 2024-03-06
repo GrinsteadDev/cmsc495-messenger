@@ -189,13 +189,18 @@ def join_room():
 
 @api_blueprint.route('/api/online-users', methods=['GET'])
 def get_online_users():
-    online_users = database.get_online_users()
+    try:
+        online_users = database.get_online_users()
+        if online_users:
+            # Update last login time for all online users
+            for user in online_users:
+                database.update_user_last_login(user.id)
+            return jsonify(online_users)
+        else:
+            return jsonify({'message': 'No online users found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-    # Assuming get_online_users returns a list of online user information
-    if online_users:
-        return jsonify(online_users)
-    else:
-        return jsonify({'message': 'No online users found'}), 404
 
 @api_blueprint.route('/api/send-message', methods=['POST'])
 def send_message():
