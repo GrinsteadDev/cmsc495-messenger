@@ -16,12 +16,16 @@ Methods:
 from flask import Flask
 from models import *
 
-def init_app(app: Flask):
+def init_app(app: Flask, drop_tables: bool = False):
     """Initialize the application with the database"""
     global db
     db.init_app(app)
     # this is needed in order for database session calls (e.g. db.session.commit)
     try:
+        if drop_tables:
+            # Added to allow for changes to the database
+            db.drop_all()
+        
         db.create_all()
     except Exception as exception:
         print("got the following exception when attempting db.create_all() in db.py: " + str(exception))

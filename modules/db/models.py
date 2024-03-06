@@ -42,7 +42,7 @@ class Chatroom(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
-    created_on = db.Column(db.Date, nullable=False, default=datetime.utcnow())
+    created_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     owner_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
 
     owner = db.relationship('UserAccount', backref=db.backref('chatrooms', lazy=True))
@@ -53,7 +53,7 @@ class Message(db.Model):
     __tablename__ = 'messages'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     text = db.Column(db.Text, nullable=False)
-    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
     chatroom_id = db.Column(db.Integer, db.ForeignKey('chatroom.id'), nullable=False)
 
@@ -78,7 +78,7 @@ class UserRole(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     role_name = db.Column(db.String(255), unique=True, nullable=False)
     description = db.Column(db.Text)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 class UserPermission(db.Model):
     """Represents a permission that can be granted to roles"""
@@ -87,7 +87,7 @@ class UserPermission(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     permission_name = db.Column(db.String(255), unique=True, nullable=False)
     description = db.Column(db.Text)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 class UserPermissionToRole(db.Model):
     """Associates permissions with roles"""
@@ -96,7 +96,7 @@ class UserPermissionToRole(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_role_id = db.Column(db.Integer, db.ForeignKey('user_role.id'))
     user_permission_id = db.Column(db.Integer, db.ForeignKey('user_permission.id'))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 class UserRoleAssignment(db.Model):
     """Assigns roles to users"""
@@ -105,7 +105,7 @@ class UserRoleAssignment(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_account.id'))
     user_role_id = db.Column(db.Integer, db.ForeignKey('user_role.id'))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     user = db.relationship('UserAccount', backref=db.backref('role_assignments', lazy=True))
     user_role = db.relationship('UserRole', backref=db.backref('user_assignments', lazy=True))
@@ -118,7 +118,7 @@ class ChatRoomAccess(db.Model):
     user_role_id = db.Column(db.Integer, db.ForeignKey('user_role.id'))
     user_permission_id = db.Column(db.Integer, db.ForeignKey('user_permission.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user_account.id'))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     chatroom = db.relationship('Chatroom', backref=db.backref('access_list', lazy=True))
     user_role = db.relationship('UserRole', backref=db.backref('chatroom_access_list', lazy=True))
@@ -132,7 +132,7 @@ class UserVerificationToken(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     token = db.Column(db.String(255), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     user = db.relationship('UserAccount', backref=db.backref('verification_tokens', lazy=True))
 
@@ -143,7 +143,7 @@ class PasswordRecovery(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     token = db.Column(db.String(255), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utc.now())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     user = db.relationship('UserAccount', backref=db.backref('recovery_tokens', lazy=True))
 

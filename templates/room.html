@@ -77,58 +77,39 @@
 {% endblock %}
 {% block body_content %}
     <div class="chatbody">
+      {# chatbody-title #}
+      <div class="chatbody-title">
+        <div class="text-wrapper-2">Earth Room</div>
+        <div class="text-wrapper-3">3 Users</div>
+      </div>
       {# chatbody-message-container #}
-        {# chatbody-icon #}
-        {# chatbody-icon #}
-        {# chatbody-icon #}
-      <div class="overlap-3">
-        <div class="suggestion-chip-dark">
-          <div class="label-text-wrapper"><div class="label-text">Awww, no invite ?!</div></div>
-        </div>
-        <div class="element-avatars"></div>
-        <div class="div-wrapper">
-          <div class="label-text-wrapper">
-            <p class="label-text">Wow, you guys are crushing it ! Im on vacation, in Mexico at the moment.</p>
-          </div>
-        </div>
-        <img class="avatars-avatar" src="{{ url_for('static', filename='img/room/avatars-3d-avatar-21.png') }}" />
-        <div class="suggestion-chip-dark-2">
-          <div class="label-text-wrapper">
-            <p class="label-text">Wow that’s amazing ! Im so happy for you. Im sure you will do amazing.</p>
-          </div>
-        </div>
-        <div class="suggestion-chip-dark-3">
-          <div class="label-text-wrapper">
-            <p class="label-text">
-              I just found out i got a promotion at work. Going to be the strum master on my project !
-            </p>
-          </div>
-        </div>
-        <div class="suggestion-chip-dark-4">
-          <div class="label-text-wrapper">
-            <p class="label-text">
-              It has been a while ! Im doing well. Finishing up my degree how about you all ?
-            </p>
-          </div>
-        </div>
-        <div class="suggestion-chip-dark-5">
-          <div class="label-text-wrapper">
-            <p class="label-text">Hey Guys long time no chat, how have you all been ?</p>
-          </div>
-        </div>
-        <img class="avatars-d-avatar" src="{{ url_for('static', filename='img/room/avatars-3d-avatar-21.png') }}" />
-        <div class="element-d-avatars"></div>
-        <div class="element-avatars-2"></div>
-        <div class="element-avatars-3"></div>
-        <div class="overlap-4">
-          <div class="text-field-dark">
-            <div class="text-field">
-              <div class="state-layer-3">
-                <div class="content-2"><div class="input-text"></div></div>
-                <div class="container-wrapper"><div class="container-2"></div></div>
-              </div>
+        {# chatbody-message-item #}
+          {# chatbody-message-icon #}
+          {# chatbody-message-body #}
+          {# chatbody-message-options #}
+        {# chatbody-messsage-box #}
+      <div class="chatbody-message-container">
+        <div class="chatbody-message-list">
+          <div class="chatbody-message-item">
+            <!-- Icon -->
+            <img class="avatars-avatar" src="{{ url_for('static', filename='img/room/avatars-3d-avatar-21.png') }}" />
+            <!-- Message -->
+            <div class="suggestion-chip-dark">
+              <div class="label-text-wrapper"><div class="label-text">Awww, no invite ?!</div></div>
             </div>
-            <div class="supporting-text-2"></div>
+            <!-- Options Menu -->
+          </div>
+        </div>
+        <!-- Message Area -->
+        <div class="chatbody-message-box">
+          <div class="chatbody-top-shelf">
+
+          </div>
+          <div class="chatbody-message-area">
+            <textarea></textarea>
+          </div>
+          <div class="chatbody-bottom-shelf">
+            
           </div>
           <div class="value-indicator"><div class="label-text-2">I</div></div>
           <div class="horizontal-dark-full"><img class="divider" src="{{ url_for('static', filename='img/room/divider-5.svg') }}" /></div>
@@ -143,10 +124,6 @@
           <div class="horizontal-dark-full-2"><img class="divider" src="{{ url_for('static', filename='img/room/divider-1.svg') }}" /></div>
           <div class="value-indicator-4"><div class="label-text-5">+</div></div>
         </div>
-      </div>
-      <div class="overlap-5">
-        <div class="text-wrapper-2">Earth Room</div>
-        <div class="text-wrapper-3">3 Users</div>
       </div>
     </div>
 {% endblock %}

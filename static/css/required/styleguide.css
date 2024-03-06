@@ -1,4 +1,14 @@
 :root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-container-color: #f0f0f0;
+  --on-primary-container-color: #333333;
+  --divider-color: #cccccc;
+  --dark-background-color: #121212;
+  --dark-text-color: #ffffff;
+  --dark-primary-container-color: #333333;
+  --dark-on-primary-container-color: #eeeeee;
+  --dark-divider-color: #444444;
   --m-3white: rgba(255, 255, 255, 1);
   --m-3black: rgba(0, 0, 0, 1);
   --m-3syslightprimary: rgba(103, 80, 164, 1);

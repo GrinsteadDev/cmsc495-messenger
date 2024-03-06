@@ -15,4 +15,5 @@ DB_URL=db_url
 DB_PORT=db_port
 DB_DATABASE=db_database
 SESSION_LIFETIME=session_timeout_in_minutes
+DEBUG=True
 ```

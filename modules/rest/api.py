@@ -118,7 +118,7 @@ def user_logout():
 @api_blueprint.route("/api/verify-email/<verification_token>", methods=['POST'])
 def verify_email(verification_token):
     # need to check token on database
-    if verification_token == "valid_token":
+    if database.verify_user_email(verification_token):
         return jsonify({'message': 'Email verification successful'})
     else:
         return jsonify({'error': 'Invalid verification token'}), 400
@@ -127,46 +127,73 @@ def verify_email(verification_token):
 def password_recovery():
     user_email = request.form.get('email')
 
-    # Perfrom user recovery, (recovery email and generate token)
-    response = {
-        'message': 'Password recovery email sent.',
-        'user_info': {
-            'email': user_email
+    #  password recovery and generate token
+    token = database.initiate_password_recovery(user_email)
+
+    if token:
+        # send an email with the recovery link containing the token
+        response = {
+            'message': 'Password recovery initiated. Check your email for instructions.',
+            'recovery_token': token
         }
-    }
+    else:
+        response = {
+            'error': 'User with provided email not found'
+        }
     return jsonify(response)
   
+@api_blueprint.route('/api/reset-password', methods=['POST'])
+def reset_password():
+    token = request.form.get('token')
+    new_password = request.form.get('new_password')
+
+    # Reset the password using the token
+    if database.reset_password_with_token(token, new_password):
+        response = {
+            'message': 'Password reset successful'
+        }
+    else:
+        response = {
+            'error': 'Invalid or expired token'
+        }
+    return jsonify(response)
+
 @api_blueprint.route('/api/chat-rooms', methods=['GET'])
 def get_chat_rooms():
+    chat_rooms = database.get_chat_rooms()
 
-    chat_rooms = [
-        {'id': 1, 'name': 'Room 1'},
-        {'id': 2, 'name': 'Room 2'},
-        {'id': 3, 'name': 'Room 3'}
-    ]
+    # Return the list of chat rooms 
     return jsonify(chat_rooms)
 
-@api_blueprint.route('/api/join-room', methods=['GET'])
+@api_blueprint.route('/api/join-room', methods=['POST'])
 def join_room():
+    # Get the room_id and user_id 
+    room_id = request.json.get('room_id')
+    user_id = request.json.get('user_id')
 
-    room_id = request.args.get('room_id')
-    user_id = request.args.get('user_id')
+    success = database.join_room(user_id, room_id)
 
-    response = {
-        'message': f'User {user_id} joined room {room_id}'
-    }
+    # Check if joining was successful and return response
+    if success:
+        response = {
+            'message': f'User {user_id} joined room {room_id} successfully'
+        }
+    else:
+        response = {
+            'error': f'Failed to join room {room_id}.'
+        }
 
-    return jsonify(response)    
+    return jsonify(response)   
 
 @api_blueprint.route('/api/online-users', methods=['GET'])
 def get_online_users():
+    online_users = database.get_online_users()
 
-    online_users = [
-        {'id': 1, 'username': 'user1'},
-        {'id': 2, 'username': 'user2'},
-        {'id': 3, 'username': 'user3'}
-    ]
-    return jsonify(online_users)
+    # Assuming get_online_users returns a list of online user information
+    if online_users:
+        return jsonify(online_users)
+    else:
+        return jsonify({'message': 'No online users found'}), 404
 
 @api_blueprint.route('/api/send-message', methods=['POST'])
 def send_message():
@@ -195,43 +222,49 @@ def peek_message():
     }
     return jsonify(message)
 
-def get_message():
-    
-    message = {
-        'sender': 'user1',
-        'content': 'This is a sample message.',
-        'timestamp': '2024-02-06T12:00:00Z'
-    }
-    return jsonify(message)
+@api_blueprint.route('/api/get-message/<message_id>', methods=['GET'])
+def get_message(message_id):
+    message = database.get_message(message_id)
+    if message:
+        return jsonify(message)
+    else:
+        return jsonify({'error': 'Message not found'}), 404
 
 @api_blueprint.route('/api/create-room', methods=['POST'])
 def create_room():
     data = request.json
-    # Assuming the JSON contains 'room_name' and 'creator_id'
     room_name = data.get('room_name')
     creator_id = data.get('creator_id')
 
-    # Dummy response for logic to create room
+    room_id = database.create_room(room_name, creator_id)
+
     response = {
-        'message': f'Room "{room_name}" created successfully by user {creator_id}',
+        'message': f'Room "{room_name}" created successfully',
+        'room_id': room_id,
         'room_name': room_name,
         'creator_id': creator_id
     }
 
-    return jsonify(response)  
+    return jsonify(response) 
 
 @api_blueprint.route('/api/delete-room', methods=['POST'])
 def delete_room():
     data = request.json
-    # Assuming the JSON contains 'room_id' and 'admin_id'
     room_id = data.get('room_id')
     admin_id = data.get('admin_id')
 
-    response = {
-        'message': f'Room {room_id} deleted successfully by admin {admin_id}',
-        'room_id': room_id,
-        'admin_id': admin_id
-    }
+    success = database.delete_room(room_id, admin_id)
+
+    if success:
+        response = {
+            'message': f'Room {room_id} deleted successfully by admin {admin_id}',
+            'room_id': room_id,
+            'admin_id': admin_id
+        }
+    else:
+        response = {
+            'error': 'Failed to delete room. Check permissions or room existence.'
+        }
 
     return jsonify(response)
 
@@ -240,24 +273,65 @@ def update_setting(setting_id):
     data = request.json
     new_value = data.get('value')
 
-    # Dummy response for settings
-    response = {
-        'message': f'Setting {setting_id} updated successfully',
-        'setting_id': setting_id,
-        'new_value': new_value
-    }
+    # Database function to update the setting
+    success = database.update_setting(setting_id, new_value)
+
+    if success:
+        response = {
+            'message': f'Setting {setting_id} updated successfully',
+            'setting_id': setting_id,
+            'new_value': new_value
+        }
+    else:
+        response = {
+            'error': f'Failed to update setting {setting_id}'
+        }
 
     return jsonify(response)
 
 @api_blueprint.route('/api/settings', methods=['POST'])
 def update_settings():
-    setting_id = request.form.get('<setting-id>')
-    new_value = request.form.get('<new-value>')
+    setting_id = request.form.get('setting_id')
+    new_value = request.form.get('new_value')
 
-    response = {
-        'message': f'Setting {setting_id} updated successfully',
-        'setting_id': setting_id,
-        'new_value': new_value
-    }
+    success = database.update_setting(setting_id, new_value)
+
+    if success:
+        response = {
+            'message': f'Setting {setting_id} updated successfully',
+            'setting_id': setting_id,
+            'new_value': new_value
+        }
+    else:
+        response = {
+            'error': f'Failed to update setting {setting_id}'
+        }
 
     return jsonify(response)
+
+@api_blueprint.route('/api/upload-file', methods=['POST'])
+def upload_file():
+    user_id = request.form.get('user_id')
+    file_name = request.form.get('file_name')
+    file_data = request.files.get('file_data')
+
+    # Upload the file
+    result = database.upload_file_todb(user_id, file_name, file_data)
+
+    return jsonify(result)
+
+@api_blueprint.route('/api/get-file/<file_id>', methods=['GET'])
+def get_file(file_id):
+    # Retrieve the file
+    result = database.get_file_from_db(file_id)
+
+    return jsonify(result)
+
+@api_blueprint.route('/api/search-files', methods=['GET'])
+def search_files():
+    user_id = request.args.get('user_id')
+    file_name = request.args.get('file_name')
+
+    result = database.search_files_by_name(user_id, file_name)
+
+    return jsonify(result)

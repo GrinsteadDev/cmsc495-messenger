@@ -18,11 +18,11 @@ from sys import path
 # Needed to set path before accessing the  module at parent dir
 path.append(f"{dirname(realpath(__file__))}/../")
 from app import app as flask_app
-from modules.settings import debug_config
+from modules.settings import DebugConfig
 
 @pytest.fixture
 def app():
-    flask_app.config.update(debug_config)
+    flask_app.config.from_object(DebugConfig())
     app = flask_app
     app.testing = True
     return app
@@ -39,6 +39,7 @@ def test_register_user(client):
         'username': 'johndoe',
         'email': 'johndoe@example.com',
         'password': 'password',
+        'password-confirm': 'password',
         'status': 'active'
     }
     response = client.post('/api/register', data=data)

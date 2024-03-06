@@ -2,15 +2,21 @@
 {% block title %}Theme Settings{% endblock %}
 {% block html_head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/Settings_theme/style.css') }}" />
+<style>
+  #darkThemeButton, #lightThemeButton {
+    cursor: pointer;
+  }
+  </style>
 {% endblock %}
 {% block html_body %}
 <div class="macbook-pro">
   <div class="div">
     <div class="overlap">
       <div class="assistive-chip-dark">
-        <div class="state-layer"><div class="label-text">Dark</div></div>
+        <div class="state-layer" id="darkThemeButton"><div class="label-text">Dark</div></div>
       </div>
-      <div class="state-layer-wrapper">
+      
+      <div class="state-layer-wrapper" id="lightThemeButton">
         <div class="state-layer">
           <p class="p"><span class="text-wrapper">Light</span> <span class="span">&nbsp;</span></p>
         </div>
@@ -37,7 +43,7 @@
             </div>
             <div class="menu-list-item">
               <div class="state-layer-2">
-                <div class="content-2"><div class="label-text-3">Notifications</div></div>
+                <a href="{{ url_for('template.fetch_templates', name='Settings_Page_Notifications') }}" class="content-2"><div class="label-text-3">Notifications</div></a>
               </div>
             </div>
             <div class="menu-list-item">
@@ -59,6 +65,24 @@
         </div>
       </div>
       <div class="headline">Theme</div>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const darkThemeButton = document.getElementById('darkThemeButton');
+          const lightThemeButton = document.getElementById('lightThemeButton');
+
+          darkThemeButton.addEventListener('click', function() {
+            console.log("Toggled to Dark Theme");
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+          });
+
+          lightThemeButton.addEventListener('click', function() {
+            console.log("Toggled to Light Theme");
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+          });
+        });
+      </script>
     </div>
     <div class="rectangle">
       <div class="label-text-wrapper"><div class="label-text-4">Label</div></div>

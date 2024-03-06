@@ -2,6 +2,7 @@
 {% block title %}Notification Settings{% endblock %}
 {% block html_head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/Settings_notifications/style.css') }}" />
+<source src="{{ url_for('static', filename='notificationTone.mp3') }}" type="audio/mp3">
 {% endblock %}
 {% block html_body %}
 <div class="macbook-pro">
@@ -17,13 +18,23 @@
         <div class="state-layer"><div class="label-text">Ding</div></div>
       </div>
       <div class="continuous-dark">
-        <div class="active-track"><div class="track"></div></div>
-        <div class="handle"></div>
-        <div class="inactive-track">
-          <div class="track-2"></div>
-          <div class="track-dot"></div>
+        <div class="slidecontainer">
+          <input type="range" min="1" max="100" value="50" class="slider" id="volumeRange">
         </div>
       </div>
+      <audio id="audioNotification" src="notification.mp3"></audio>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          //Notification Audio
+          var slider = document.getElementById("volumeRange");
+          var audioElement = document.getElementById("audioNotification");
+          slider.oninput = function() {
+            console.log(event.target.value / 100);
+            var volume = event.target.value / 100;
+            audioElement.volume = volume;
+          }
+        });
+      </script>
       <div class="text-wrapper">Notification Volume:</div>
       <div class="text-wrapper-2">Notification Sound:</div>
       <div class="overlap">
@@ -57,7 +68,7 @@
             </div>
             <div class="menu-list-item">
               <div class="state-layer-2">
-                <div class="content"><div class="label-text-3">Theme</div></div>
+                <a href="{{ url_for('template.fetch_templates', name='Settings_Page_theme') }}" class="content-2"><div class="label-text-3">Theme</div></a>
               </div>
             </div>
             <div class="menu-list-item"></div>
