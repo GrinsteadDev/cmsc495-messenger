@@ -11,10 +11,11 @@ Methods:
    Public methods, privet methods don't need to be included here
 """
 
+import datetime
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from flask import current_app
 import bcrypt
-from models import Message, PasswordRecovery, UserAccount, UserFile, UserPermission, UserPermissionToRole, UserRoleAssignment, UserVerificationToken, db
+from models import Chatroom, ChatroomMember, Message, PasswordRecovery, Settings, UserAccount, UserFile, UserPermission, UserPermissionToRole, UserRoleAssignment, UserVerificationToken, db
 import secrets
 
 def get_user(username):
@@ -89,6 +90,7 @@ def upload_file_todb(user_id, file_name, file_data):
         db.session.add(new_file)
         try:
             db.session.commit()
+            update_user_last_login(user_id)
             return {'message': 'File Successfully Uploaded.'}
         except Exception as e:
             db.session.rollback()
@@ -109,6 +111,7 @@ def search_files_by_name(user_id, file_name):
     with current_app.app_context():
         files = UserFile.query.filter_by(user_id=user_id, file_name=file_name).all()
         if files:
+            update_user_last_login(user_id)
             return [{'file_id': file.id, 'file_name': file.file_name} for file in files]
         else:
             return {'message': 'No Files Found.'}
@@ -119,6 +122,7 @@ def store_message(user_id, chatroom_id, text):
     db.session.add(new_message)
     try:
         db.session.commit()
+        update_user_last_login(user_id)
         return{'message': 'Message Successfully Stored', 'messge_id': new_message.id}
     except Exception as e:
         db.session.rollback()
@@ -178,3 +182,74 @@ def reset_password_with_token(token, new_password):
         db.session.commit()
         return True
     return False
+
+def create_room(name, owner_id):
+    """Creates new Chatroom"""
+    new_room = Chatroom(name=name, owner_id=owner_id)
+    db.session.add(new_room)
+    try:
+      db.session.commit()
+      update_user_last_login(owner_id)
+      return new_room.id
+    except Exception as e:
+        db.session.rollback()
+        return None
+
+def delete_room(room_id, user_id):
+    """Deletes Chatrooom"""
+    room = Chatroom.query.get(room>id)
+    if room and room.owner_id == user_id:
+        db.session.delete(room)
+        db.session.commit()
+        update_user_last_login(user_id)
+        return True
+    return False
+
+def get_chat_rooms():
+    """Returns all chatrooms"""
+    return Chatroom.query.all()
+
+def join_room(user_id, room_id):
+    """Allows user to join specific chatroom"""
+    new_membership = ChatroomMember(user_id=user_id, chatroom_id=room_id)
+    db.session.add(new_membership)
+    try:
+      db.session.commit()
+      update_user_last_login(user_id)
+      return True
+    except Exception as e:
+        db.session.rollback()
+        return False
+
+def update_settings(user_id, notififcation_enabled=None, theme=None):
+    """Allows user to update settings"""
+    settings = Settings.query.filter_by(user_id=user_id).first()
+    if not settings:
+        settings = Settings(user_id=user_id)
+        db.session.add(settings)
+
+    if notififcation_enabled is not None:
+        settings.notification_enabled = notififcation_enabled
+    if theme:
+        settings.theme = theme
+
+    db.session.commit()
+    update_user_last_login(user_id)
+    return True
+
+def update_user_last_login(user_id):
+    """Updates last_login field f/user"""
+    user = UserAccount.query.get(user_id)
+    if user:
+        user.last_login = datetime.utcnow()
+        try:
+          db.session.commit()
+        except Exception as e:
+            print(f"Error updating last_login: {e}")
+            db.session.rollback()
+
+def get_online_users():
+    """Tracks online users if they've been active within 15 minutes"""
+    threshold = datetime.now() - datetime.timedelta(minutes=15)
+    online_users = UserAccount.query.filter(UserAccount.last_login >= threshold).all()
+    return online_users
