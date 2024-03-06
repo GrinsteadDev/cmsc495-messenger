@@ -146,3 +146,26 @@ class PasswordRecovery(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utc.now())
 
     user = db.relationship('UserAccount', backref=db.backref('recovery_tokens', lazy=True))
+
+class ChatroomMember(db.Model):
+    """Tracks membership of users in chatrroms"""
+    __tablename__ = 'chatroom_member'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    chatroom_id = db.Column(db.Integer, db.ForeignKey('chatroom.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
+    joined_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    chatroom = db.relationship('Chatroom', backref=db.backref('members', lazy='dynamic'))
+    user = db.relationship('UserAccount', backref=db.backref('chatroom_memberships', lazy='dynamic'))
+
+class Settings(db.Model):
+    """user settings"""
+    __tablename__ = 'settings'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_account.id'), nullable=False)
+    notification_enabled = db.Column(db.Boolean, default=True)
+    theme = db.Column(db.String(50), default='light')
+
+    user = db.relationships('UserAccount', backref=db.backref('settings', uselist=False))
