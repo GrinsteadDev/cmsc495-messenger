@@ -6,6 +6,7 @@ Date:
 Contributors:
    Catherine Casey
    Devin Grinstead - Ammened on 2-20-2024
+   Derrick Sanchez - Added line in user_login() 3-5-2024
 Methods:
    
 Objects:
@@ -79,6 +80,7 @@ def user_login():
         # Sets Session information
         mysession.set('USER', username)
         mysession.set('STATUS', 'logged-in')
+        database.update_user_last_login(user.id) #updates user's last login in db for online user tracking 
 
         response = {
             'message': 'Login successful',
