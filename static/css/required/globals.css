@@ -1,0 +1,59 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Roboto:500,700,400");
+
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-container-color: #f0f0f0;
+  --on-primary-container-color: #333333;
+  --divider-color: #cccccc;
+  --button-outline-color: #4a90e2;
+  --link-color: #1a0dab;
+  --border-color: #cccccc;
+  --dark-background-color: #121212;
+  --dark-text-color: #ffffff;
+  --dark-primary-container-color: #333333;
+  --dark-on-primary-container-color: #eeeeee;
+  --dark-divider-color: #444444;
+  --dark-button-outline-color: #4a90e2;
+  --dark-link-color: #4a90e2;
+  --dark-border-color: #444444;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0px;
+  height: 100%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+}
+
+button:focus-visible {
+  outline: -webkit-focus-ring-color auto 5px !important;
+  outline: 2px solid var(--button-outline-color) !important;
+}
+
+a {
+  text-decoration: none;
+  color: var(--link-color);
+}
+
+.border {
+  border-color: var(--border-color);
+}
+
+body.dark-mode {
+  --background-color: var(--dark-background-color);
+  --text-color: var(--dark-text-color);
+  --primary-container-color: var(--dark-primary-container-color);
+  --on-primary-container-color: var(--dark-on-primary-container-color);
+  --divider-color: var(--dark-divider-color);
+  --button-outline-color: var(--dark-button-outline-color);
+  --link-color: var(--dark-link-color);
+  --border-color: var(--dark-border-color);
+}

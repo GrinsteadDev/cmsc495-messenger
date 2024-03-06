@@ -1,6 +1,17 @@
-import axios from 'axios';
+/*
+Purpose:
+   Settings
+   Client side functionality for settings management
 
-async function updateSetting(settingId, settingValue) {
+Contributors:
+   Michael Gurewitz
+   Devin Grinstead
+   
+*/
+
+const axios = window.axios;
+
+export async function updateSetting(settingId, settingValue) {
     try {
       const response = await axios.post(`/api/settings/${settingId}`, { 
         settingValue 
@@ -10,3 +21,16 @@ async function updateSetting(settingId, settingValue) {
       console.error(error);
     }
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const updateSettingForm = document.getElementById('updateSettingForm');
+  if (updateSettingForm) {
+    updateSettingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(updateSettingForm);
+      const settingId = formData.get('settingId');
+      const settingValue = formData.get('settingValue');
+      await updateSetting(settingId, settingValue);
+    });
+  }
+});

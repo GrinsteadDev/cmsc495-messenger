@@ -1,34 +1,96 @@
-import axios from 'axios';
+/*
+Purpose:
+   Authentication
+   Client side functionality for user authentication
 
-async function registerUser(firstName, lastName, userName, userEmail, userPassword){
-  try {
-    const response = await axios.post('/api/register', {
-      firstName,
-      lastName,
-      userName,
-      userEmail,
-      userPassword
-    });
-    console.log(response.data);
-    } catch (error) {
-    console.error(error);
-  }
-}
+Contributors:
+   Michael Gurewitz
+   Devin Grinstead
+   
+*/
 
-async function login(userName, password, status = 'active') {
+const axios = window.axios;
+
+export async function registerUser(firstName, lastName, userName, userEmail, userPassword, userPassword2){
   try {
-    const response = await axios.post('/api/login', {
-      username: userName,
-      password,
-      status
-    });
+    const response = await axios.post(
+      '/api/register',
+      {
+        'first-name': firstName,
+        'last-name': lastName,
+        'username': userName,
+        'email': userEmail,
+        'password': userPassword,
+        'password-confirm': userPassword2
+      },
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+    );
     console.log(response.data);
+    window.location.href = '/login';
   } catch (error) {
     console.error(error);
+    showNotification('Error', error.toString(), 5000);
   }
 }
 
-async function logout(logoutMessage = '') {
+document.addEventListener('DOMContentLoaded', (event) => {
+  const form = document.getElementById('registerUserForm');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const firstName = formData.get('first-name');
+      const lastName = formData.get('last-name');
+      const userName = formData.get('username');
+      const userEmail = formData.get('email');
+      const userPassword = formData.get('password');
+      const userPassword2 = formData.get('password-confirm')
+      await registerUser(firstName, lastName, userName, userEmail, userPassword, userPassword2);
+    });
+  }
+});
+
+export async function login(userName, password, status = 'active') {
+  try {
+    const response = await axios.post(
+      '/api/login',
+      {
+        username: userName,
+        password: password,
+        status: status
+      }, 
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+    );
+    console.log(response.data);
+    window.location.href = '/home';
+  } catch (error) {
+    console.error(error);
+    showNotification('Error', error.toString(), 5000);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(loginForm);
+      const userName = formData.get('username');
+      const password = formData.get('password');
+      await login(userName, password);
+    });
+  }
+});
+
+export async function logout(logoutMessage = '') {
   try {
     const token = 'ACCESS_TOKEN'; //TODO: Put real value here
     const response = await axios.post('/api/logout', {
@@ -39,12 +101,25 @@ async function logout(logoutMessage = '') {
       }
     });
     console.log(response.data);
+    window.location.href = '/login';
+    showNotification('Logged out.', "Successfully logged out.", 5000);
   } catch (error) {
     console.error(error);
+    showNotification('Error', error.toString(), 5000);
   }
 }
 
-async function passwordRecovery(userEmail) {
+document.addEventListener('DOMContentLoaded', (event) => {
+  const logoutButton = document.getElementById('logoutButton');
+  if (logoutButton) {
+    logoutButton.addEventListener('click', async (e) => {
+      e.preventDefault();
+      await logout();
+    });
+  }
+});
+
+export async function passwordRecovery(userEmail) {
   try {
     const response = await axios.post('/api/password-recovery', {
       email: userEmail
@@ -54,3 +129,15 @@ async function passwordRecovery(userEmail) {
       console.error(error);
     }
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const passwordRecoveryForm = document.getElementById('passwordRecoveryForm');
+  if (passwordRecoveryForm) {
+    passwordRecoveryForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(passwordRecoveryForm);
+      const userEmail = formData.get('userEmail');
+      await passwordRecovery(userEmail);
+    });
+  }
+});

@@ -1,0 +1,5 @@
+<!-- Create 02-13-2024 by Devin Grinstead -->
+<svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon fill="#302444" points="0,0 100,0 100,15 50,5 0,15"></polygon>
+    <polygon fill="#302444" points="0,100 100,100 100,85 50,95 0,85"></polygon>
+</svg>

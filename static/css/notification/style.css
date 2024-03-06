@@ -1,0 +1,53 @@
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
+
+.notification-container {
+  background-color: var(--m3sysdarksurface-container-high);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 25px;
+  border-radius: 25px;
+  position: absolute;
+  width: fit-content;
+  width: -moz-fit-content;
+  top: 10vh;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.notification-container .divider {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 1px;
+  object-fit: cover;
+}
+
+.notification-container .headline {
+  font-family: var(--m3-headline-small-font-family);
+  font-weight: var(--m3-headline-small-font-weight);
+  color: var(--m3sysdarkon-surface);
+  font-size: var(--m3-headline-small-font-size);
+  text-align: center;
+  letter-spacing: var(--m3-headline-small-letter-spacing);
+  line-height: var(--m3-headline-small-line-height);
+  white-space: nowrap;
+  font-style: var(--m3-headline-small-font-style);
+}
+
+.notification-container .text-wrapper {
+  color: var(--m3sysdarkon-surface);
+  white-space: nowrap;
+  font-family: var(--m3-headline-small-font-family);
+  font-weight: var(--m3-headline-small-font-weight);
+  font-size: var(--m3-headline-small-font-size);
+  text-align: center;
+  letter-spacing: var(--m3-headline-small-letter-spacing);
+  line-height: var(--m3-headline-small-line-height);
+  font-style: var(--m3-headline-small-font-style);
+}

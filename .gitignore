@@ -388,3 +388,15 @@ Temporary Items
 
 # VisualStudio Virtual Python Environment
 env
+
+# Visual Studio Code Launch Settings
+.vscode/*
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# Python .env file
+*.env

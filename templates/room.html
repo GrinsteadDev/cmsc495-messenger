@@ -1,162 +1,129 @@
-{% extends 'base.html' %}
-{% block title %}Lobby{% endblock %}
+{% extends 'header-menu.html' %}
+{% block title %}Room{% endblock %}
 {% block html_head %}
+{{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/room/style.css') }}" />
 {% endblock %}
-{% block html_body %}
-<div class="macbook-pro">
-    <div class="overlap-group-wrapper">
-        <div class="overlap-group">
-            <div class="container">
-                <div class="state-layer">
-                    <img class="unselected-icon" src="{{ url_for('static', filename='img/room/icon-14.png') }}" />
-                    <img class="selected-icon" src="{{ url_for('static', filename='img/room/selected-icon.svg') }}" />
-                </div>
-            </div>
-            <div class="overlap">
-                <div class="text-wrapper">Current User :</div>
-                <div class="div">User 1</div>
-            </div>
-            <div class="user-images-user"><img class="check" src="{{ url_for('static', filename='img/room/check-1.svg') }}" /></div>
-            <div class="search-bar-dark">
-                <div class="state-layer-2">
-                    <div class="leading-icon">
-                        <div class="state-layer-wrapper">
-                            <div class="icon-wrapper"><img class="icon" src="{{ url_for('static', filename='img/room/icon-11.svg') }}" /></div>
-                        </div>
-                    </div>
-                    <div class="content"><div class="supporting-text">Search</div></div>
-                    <div class="trailing-elements">
-                        <div class="element-trailing-icon">
-                            <div class="state-layer-wrapper">
-                                <div class="icon-wrapper"><img class="icon" src="{{ url_for('static', filename='img/room/icon-10.svg') }}" /></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="overlap-2">
-                <div class="overlap-3">
-                    <div class="suggestion-chip-dark">
-                        <div class="label-text-wrapper"><div class="label-text">Awww, no invite ?!</div></div>
-                    </div>
-                    <div class="element-avatars"></div>
-                    <div class="div-wrapper">
-                        <div class="label-text-wrapper">
-                            <p class="label-text">Wow, you guys are crushing it ! Im on vacation, in Mexico at the moment.</p>
-                        </div>
-                    </div>
-                    <img class="avatars-avatar" src="{{ url_for('static', filename='img/room/avatars-3d-avatar-21.png') }}" />
-                    <div class="suggestion-chip-dark-2">
-                        <div class="label-text-wrapper">
-                            <p class="label-text">Wow that’s amazing ! Im so happy for you. Im sure you will do amazing.</p>
-                        </div>
-                    </div>
-                    <div class="suggestion-chip-dark-3">
-                        <div class="label-text-wrapper">
-                            <p class="label-text">
-                                I just found out i got a promotion at work. Going to be the strum master on my project !
-                            </p>
-                        </div>
-                    </div>
-                    <div class="suggestion-chip-dark-4">
-                        <div class="label-text-wrapper">
-                            <p class="label-text">
-                                It has been a while ! Im doing well. Finishing up my degree how about you all ?
-                            </p>
-                        </div>
-                    </div>
-                    <div class="suggestion-chip-dark-5">
-                        <div class="label-text-wrapper">
-                            <p class="label-text">Hey Guys long time no chat, how have you all been ?</p>
-                        </div>
-                    </div>
-                    <img class="avatars-d-avatar" src="{{ url_for('static', filename='img/room/avatars-3d-avatar-21.png') }}" />
-                    <div class="element-d-avatars"></div>
-                    <div class="element-avatars-2"></div>
-                    <div class="element-avatars-3"></div>
-                    <div class="overlap-4">
-                        <div class="text-field-dark">
-                            <div class="text-field">
-                                <div class="state-layer-3">
-                                    <div class="content-2"><div class="input-text"></div></div>
-                                    <div class="trailing-icon"><div class="container-2"></div></div>
-                                </div>
-                            </div>
-                            <div class="supporting-text-2"></div>
-                        </div>
-                        <div class="img-wrapper"><img class="img" src="{{ url_for('static', filename='img/room/icon-9.svg') }}" /></div>
-                        <img class="icon-2" src="{{ url_for('static', filename='img/room/icon-8.svg') }}" />
-                        <img class="icons-folder" src="{{ url_for('static', filename='img/room/icons-folder-24px.svg') }}" />
-                        <img class="icons-delete" src="{{ url_for('static', filename='img/room/icons-delete-24px.svg') }}" />
-                    </div>
-                </div>
-                <div class="overlap-5">
-                    <div class="text-wrapper-2">Earth Room</div>
-                    <div class="text-wrapper-3">3 Users</div>
-                </div>
-            </div>
-            <div class="primary-action">
-                <div class="state-layer-4"><div class="label-text-2">Log Out</div></div>
-            </div>
-            <div class="primary-action-2">
-                <div class="state-layer-4"><div class="label-text-2">Exit Room</div></div>
-            </div>
-            <div class="navigation-drawer">
-                <div class="headline"><div class="title">Menu</div></div>
-                <div class="section-header">
-                    <div class="left"><div class="label">Rooms</div></div>
-                </div>
-                <div class="nav-item">
-                    <div class="state-layer-5">
-                        <img class="icon" src="{{ url_for('static', filename='img/room/icon-213.svg') }}" />
-                        <div class="label-2">Change Room</div>
-                        <div class="badge-label-text"></div>
-                    </div>
-                </div>
-                <div class="nav-item-2">
-                    <div class="state-layer-5">
-                        <img class="icon" src="{{ url_for('static', filename='img/room/icon-217.svg') }}" />
-                        <div class="label-3">Edit Room</div>
-                        <div class="badge-label-text-2"></div>
-                    </div>
-                </div>
-                <div class="divider"><img class="divider-2" src="{{ url_for('static', filename='img/room/divider-2.svg') }}" /></div>
-                <div class="section-header"><div class="left"></div></div>
-                <div class="nav-item-2">
-                    <div class="state-layer-5">
-                        <img class="icon" src="{{ url_for('static', filename='img/room/icon-3.png') }}" />
-                        <div class="label-4"></div>
-                    </div>
-                </div>
-                <div class="nav-item-2">
-                    <div class="state-layer-5"><img class="icon" src="{{ url_for('static', filename='img/room/icon-3.png') }}" /></div>
-                </div>
-                <div class="nav-item-2">
-                    <div class="state-layer-5">
-                        <img class="icon" src="{{ url_for('static', filename='img/room/icon-3.png') }}" />
-                        <div class="label-4"></div>
-                    </div>
-                </div>
-                <div class="divider"><img class="divider-2" src="{{ url_for('static', filename='img/room/divider-1.svg') }}" /></div>
-                <div class="section-header">
-                    <div class="left"><div class="label-5">Options</div></div>
-                </div>
-                <div class="nav-item-2">
-                    <div class="state-layer-5">
-                        <img class="icon" src="{{ url_for('static', filename='img/room/icon-1.svg') }}" />
-                        <div class="label-4">Exit Room</div>
-                    </div>
-                </div>
-                <div class="nav-item-2">
-                    <div class="state-layer-5">
-                        <img class="icon" src="{{ url_for('static', filename='img/room/icon-1.svg') }}" />
-                        <div class="label-4">Logout</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{% block header_content %}
+<div class="search-bar-dark">
+  <div class="state-layer-2">
+    <div class="leading-icon">
+      <div class="state-layer-wrapper">
+        <div class="icon-wrapper"><img class="icon" src="{{ url_for('static', filename='img/room/icon-10.svg') }}" /></div>
+      </div>
     </div>
+    <div class="content"><div class="supporting-text">Search</div></div>
+    <div class="trailing-elements">
+      <div class="container-wrapper">
+        <div class="state-layer-wrapper">
+          <div class="icon-wrapper"><img class="icon" src="{{ url_for('static', filename='img/room/icon-9.svg') }}" /></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
+{% block menu_item1 %}{% endblock %}
+{% block menu_item2 %}
+<div class="section-header">
+  <div class="left"><div class="label">Rooms</div></div>
+</div>
+{% endblock %}
+{% block menu_item3 %}
+<div class="nav-item">
+  <div class="state-layer-5">
+    <img class="icon" src="{{ url_for('static', filename='img/room/icon-212.svg') }}" />
+    <div class="label-2">Change Room</div>
+    <div class="badge-label-text"></div>
+  </div>
+</div>
+{% endblock %}
+{% block menu_item4 %}
+<div class="nav-item-2">
+  <div class="state-layer-5">
+    <img class="icon" src="{{ url_for('static', filename='img/room/icon-216.svg') }}" />
+    <div class="label-3">Edit Room</div>
+    <div class="badge-label-text-2"></div>
+  </div>
+</div>
+{% endblock %}
+{% block menu_item5 %}
+<div class="divider-2"><img class="divider" src="{{ url_for('static', filename='img/room/divider-3.svg') }}" /></div>
+{% endblock %}
+{% block menu_item6 %}
+{% endblock %}
+{% block menu_item7 %}
+<div class="section-header">
+  <div class="left"><div class="label-5">Options</div></div>
+</div>
+{% endblock %}
+{% block menu_item8 %}
+<div class="nav-item-2">
+  <div class="state-layer-5">
+    <img class="icon" src="{{ url_for('static', filename='img/room/icon.svg') }}" />
+    <div class="label-4">Exit Room</div>
+  </div>
+</div>
+{% endblock %}
+{% block menu_item9 %}
+<div class="nav-item-2">
+  <div class="state-layer-5">
+    <img class="icon" src="{{ url_for('static', filename='img/room/icon.svg') }}" />
+    <div class="label-4">Logout</div>
+  </div>
+</div>
+{% endblock %}
+{% block menu_item10 %}
+{% endblock %}
+{% block body_content %}
+    <div class="chatbody">
+      {# chatbody-title #}
+      <div class="chatbody-title">
+        <div class="text-wrapper-2">Earth Room</div>
+        <div class="text-wrapper-3">3 Users</div>
+      </div>
+      {# chatbody-message-container #}
+        {# chatbody-message-item #}
+          {# chatbody-message-icon #}
+          {# chatbody-message-body #}
+          {# chatbody-message-options #}
+        {# chatbody-messsage-box #}
+      <div class="chatbody-message-container">
+        <div class="chatbody-message-list">
+          <div class="chatbody-message-item">
+            <!-- Icon -->
+            <img class="avatars-avatar" src="{{ url_for('static', filename='img/room/avatars-3d-avatar-21.png') }}" />
+            <!-- Message -->
+            <div class="suggestion-chip-dark">
+              <div class="label-text-wrapper"><div class="label-text">Awww, no invite ?!</div></div>
+            </div>
+            <!-- Options Menu -->
+          </div>
+        </div>
+        <!-- Message Area -->
+        <div class="chatbody-message-box">
+          <div class="chatbody-top-shelf">
 
+          </div>
+          <div class="chatbody-message-area">
+            <textarea></textarea>
+          </div>
+          <div class="chatbody-bottom-shelf">
+            
+          </div>
+          <div class="value-indicator"><div class="label-text-2">I</div></div>
+          <div class="horizontal-dark-full"><img class="divider" src="{{ url_for('static', filename='img/room/divider-5.svg') }}" /></div>
+          <div class="divider-wrapper"><img class="img" src="{{ url_for('static', filename='img/room/divider-4.svg') }}" /></div>
+          <div class="img-wrapper"><img class="icon-2" src="{{ url_for('static', filename='img/room/icon-8.svg') }}" /></div>
+          <img class="icon-3" src="{{ url_for('static', filename='img/room/icon-7.svg') }}" />
+          <img class="icons-folder" src="{{ url_for('static', filename='img/room/icons-folder-24px.svg') }}" />
+          <img class="icons-delete" src="{{ url_for('static', filename='img/room/icons-delete-24px.svg') }}" />
+          <div class="value-indicator-2"><div class="label-text-3">B</div></div>
+          <div class="value-indicator-3"><div class="label-text-4">@</div></div>
+          <p class="p">Add Message To Chat Room</p>
+          <div class="horizontal-dark-full-2"><img class="divider" src="{{ url_for('static', filename='img/room/divider-1.svg') }}" /></div>
+          <div class="value-indicator-4"><div class="label-text-5">+</div></div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
