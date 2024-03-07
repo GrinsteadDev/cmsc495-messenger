@@ -109,6 +109,7 @@ def init_app_settings(app: Flask = None, debug: bool = False)-> Flask:
             debug = bool(environ.get('DEBUG', 'False').upper() in ['TRUE', '1' 'T'])
 
         if debug:
+            print("Running in DEBUG MODE")
             app.config.from_object(DebugConfig())
         else:
             app.config.from_object(ReleaseConfig())
